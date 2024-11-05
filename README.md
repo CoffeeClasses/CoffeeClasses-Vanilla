@@ -1,1 +1,1 @@
-# CoffeeClasses-Vanilla
+# CoffeeClasses (Vanilla)
