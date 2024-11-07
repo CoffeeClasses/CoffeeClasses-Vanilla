@@ -1,0 +1,61 @@
+package fr.cyu.coffeeclasses.vanilla.entities.users;
+
+import fr.cyu.coffeeclasses.vanilla.entities.elements.Assessment;
+import fr.cyu.coffeeclasses.vanilla.entities.elements.Course;
+import fr.cyu.coffeeclasses.vanilla.entities.elements.Enrollment;
+import fr.cyu.coffeeclasses.vanilla.entities.elements.Grade;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.HashSet;
+
+@Entity
+public class Student extends User {
+	/*
+		Fields
+	 */
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Enrollment> enrollments = new HashSet<>();
+
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Grade> grades = new HashSet<>();
+
+	/*
+		Methods
+	 */
+	protected Student() {}
+	protected Student(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+		super(firstName, lastName, email, password, birthDate);
+	}
+
+	// Enrollments
+	public Set<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+	public void setEnrollments(Set<Enrollment> enrollments) {
+		this.enrollments = enrollments;
+	}
+	public void addEnrollment(Course course) {
+		enrollments.add(new Enrollment(this, course));
+	}
+	public void removeEnrollment(Enrollment enrollment) {
+		enrollments.remove(enrollment);
+	}
+
+	// Grades
+	public Set<Grade> getGrades() {
+		return grades;
+	}
+	public void setGrades(Set<Grade> grades) {
+		this.grades = grades;
+	}
+	public void addGrade(Assessment assessment, double value) {
+		Grade grade = new Grade(assessment, this, value);
+		grades.add(grade);
+	}
+	public void removeGrade(Grade grade) {
+		grades.remove(grade);
+	}
+}
