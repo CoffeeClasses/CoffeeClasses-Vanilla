@@ -31,7 +31,7 @@ public class DatabasePrintServlet extends HttpServlet {
         request.setAttribute("grades", grades);
 
         // Forward to JSP
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/database_print.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/database_print.jsp");
         dispatcher.forward(request, response);
     }
 }
