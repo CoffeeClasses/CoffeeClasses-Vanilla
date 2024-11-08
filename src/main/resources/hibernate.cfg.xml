@@ -21,5 +21,15 @@
 
 		<!-- Schema update (set to "update" to automatically update schema) -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- Classes -->
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Administrator"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Student"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Teacher"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.User"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Course"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Assessment"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Enrollment"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Grade"/>
 	</session-factory>
 </hibernate-configuration>
