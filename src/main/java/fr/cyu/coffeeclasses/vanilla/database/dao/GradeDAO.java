@@ -1,6 +1,6 @@
-package fr.cyu.coffeeclasses.vanilla.database.daos;
+package fr.cyu.coffeeclasses.vanilla.database.dao;
 
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Grade;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Grade;
 
 public class GradeDAO extends GenericDAO<Grade> {
 	// Singleton

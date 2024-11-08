@@ -1,9 +1,9 @@
-package fr.cyu.coffeeclasses.vanilla.entities.users;
+package fr.cyu.coffeeclasses.vanilla.entity.user;
 
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Assessment;
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Course;
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Enrollment;
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Grade;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Assessment;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Grade;
 
 import jakarta.persistence.*;
 

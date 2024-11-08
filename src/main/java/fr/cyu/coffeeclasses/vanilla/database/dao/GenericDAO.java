@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.database.daos;
+package fr.cyu.coffeeclasses.vanilla.database.dao;
 
 import fr.cyu.coffeeclasses.vanilla.database.HibernateUtil;
 

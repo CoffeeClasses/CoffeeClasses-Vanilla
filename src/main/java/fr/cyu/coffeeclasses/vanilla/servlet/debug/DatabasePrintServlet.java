@@ -1,8 +1,8 @@
-package fr.cyu.coffeeclasses.vanilla.servlets.debug;
+package fr.cyu.coffeeclasses.vanilla.servlet.debug;
 
-import fr.cyu.coffeeclasses.vanilla.database.daos.*;
-import fr.cyu.coffeeclasses.vanilla.entities.elements.*;
-import fr.cyu.coffeeclasses.vanilla.entities.users.*;
+import fr.cyu.coffeeclasses.vanilla.database.dao.*;
+import fr.cyu.coffeeclasses.vanilla.entity.element.*;
+import fr.cyu.coffeeclasses.vanilla.entity.user.*;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/display_data")
+@WebServlet("/display-data")
 public class DatabasePrintServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class DatabasePrintServlet extends HttpServlet {
         request.setAttribute("grades", grades);
 
         // Forward to JSP
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/database_print.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/debug/show-database.jsp");
         dispatcher.forward(request, response);
     }
 }

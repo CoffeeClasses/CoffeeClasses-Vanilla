@@ -1,6 +1,6 @@
-package fr.cyu.coffeeclasses.vanilla.database.daos;
+package fr.cyu.coffeeclasses.vanilla.database.dao;
 
-import fr.cyu.coffeeclasses.vanilla.entities.users.Student;
+import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 
 public class StudentDAO extends GenericDAO<Student> {
 	// Singleton

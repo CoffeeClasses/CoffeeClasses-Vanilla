@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.entities.users;
+package fr.cyu.coffeeclasses.vanilla.entity.user;
 
 import jakarta.persistence.Entity;
 

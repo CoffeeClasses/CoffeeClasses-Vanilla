@@ -1,6 +1,6 @@
-package fr.cyu.coffeeclasses.vanilla.database.daos;
+package fr.cyu.coffeeclasses.vanilla.database.dao;
 
-import fr.cyu.coffeeclasses.vanilla.entities.users.Teacher;
+import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 public class TeacherDAO extends GenericDAO<Teacher> {
 	// Singleton
 	private static final TeacherDAO INSTANCE = new TeacherDAO();

@@ -1,6 +1,6 @@
-package fr.cyu.coffeeclasses.vanilla.database.daos;
+package fr.cyu.coffeeclasses.vanilla.database.dao;
 
-import fr.cyu.coffeeclasses.vanilla.entities.elements.Assessment;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Assessment;
 
 public class AssessmentDAO extends GenericDAO<Assessment> {
 	// Singleton

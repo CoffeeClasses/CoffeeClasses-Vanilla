@@ -23,13 +23,13 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- Classes -->
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Administrator"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Student"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.Teacher"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.users.User"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Course"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Assessment"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Enrollment"/>
-		<mapping class="fr.cyu.coffeeclasses.vanilla.entities.elements.Grade"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.user.Administrator"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.user.Student"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.user.Teacher"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.user.User"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.element.Course"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.element.Assessment"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment"/>
+		<mapping class="fr.cyu.coffeeclasses.vanilla.entity.element.Grade"/>
 	</session-factory>
 </hibernate-configuration>

@@ -1,6 +1,6 @@
-package fr.cyu.coffeeclasses.vanilla.entities.elements;
+package fr.cyu.coffeeclasses.vanilla.entity.element;
 
-import fr.cyu.coffeeclasses.vanilla.entities.users.Student;
+import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
