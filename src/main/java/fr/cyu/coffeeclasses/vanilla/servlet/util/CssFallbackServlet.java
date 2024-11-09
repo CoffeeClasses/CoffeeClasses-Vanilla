@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet("/css/*")
+@WebServlet("/css/**/*")
 public class CssFallbackServlet extends HttpServlet {
 
 	@Override

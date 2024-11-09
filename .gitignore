@@ -33,3 +33,6 @@ bin/
 
 ### Build artifacts ###
 target/
+
+### CSS Output ###
+css/

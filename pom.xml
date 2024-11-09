@@ -19,14 +19,12 @@
 		<!--
 			Used for packaging
 		-->
-
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-
         <!-- Database driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -34,15 +32,12 @@
 			<version>42.7.4</version>
             <scope>runtime</scope>
         </dependency>
-
         <!-- Password hashing -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
-
-
         <!-- JSTL Tags -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
@@ -76,6 +71,7 @@
     <build>
         <finalName>coffeeclasses-vanilla</finalName>
         <plugins>
+            <!-- Compile into WAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -83,6 +79,29 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+            <!-- Use SCSS instead of CSS -->
+            <plugin>
+                <groupId>io.github.cleydyr</groupId>
+                <artifactId>dart-sass-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <inputFolder>${project.basedir}/src/main/resources/scss</inputFolder>
+                    <loadPaths>
+                        [${project.basedir}/src/main/resources/scss/pages]
+                    </loadPaths>
+                    <outputFolder>${project.basedir}/src/main/webapp/css</outputFolder>
+                    <style>COMPRESSED</style>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-css-using-sass</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>compile-sass</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
