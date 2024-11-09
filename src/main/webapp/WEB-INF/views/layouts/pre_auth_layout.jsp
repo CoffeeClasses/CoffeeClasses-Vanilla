@@ -1,4 +1,4 @@
-<%@ page import="java.util.Optional" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ page import="java.security.InvalidParameterException" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -6,7 +6,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CoffeeClasses - <%= request.getParameter("title") %></title>
-		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pre-auth.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/<%= request.getParameter("contentPage") %>.css">
 	</head>
 	<body>
 		<!-- Display error message if it exists -->
@@ -23,7 +25,7 @@
 					String contentPage = request.getParameter("contentPage");
 					if (contentPage != null) {
 						out.flush();
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage + ".jsp");
 						dispatcher.include(request, response);
 					} else {
 						throw new InvalidParameterException("Pre-Auth layout requested with no content.");
