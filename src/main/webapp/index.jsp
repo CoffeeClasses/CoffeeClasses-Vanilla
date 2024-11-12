@@ -1,7 +1,7 @@
 <%
 	if (session != null && session.getAttribute("userId") != null) {
-		response.sendRedirect("/panel");
+		response.sendRedirect(pageContext.getRequest().getServletContext().getContextPath() + "/panel");
 	} else {
-		response.sendRedirect("/login");
+		response.sendRedirect(pageContext.getRequest().getServletContext().getContextPath() + "/login");
 	}
 %>

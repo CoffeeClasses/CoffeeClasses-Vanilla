@@ -1,21 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ page import="java.security.InvalidParameterException" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page import="java.security.InvalidParameterException" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<title>CoffeeClasses - <%= request.getParameter("title") %></title>
-		<link rel="stylesheet" href="<c:url value='/css/main.css'/>">
-		<link rel="stylesheet" href="<c:url value='/css/pre-auth.css'/>">
-		<!-- This is a workaround due to \${} issues currently happening with the project. -->
-		<link rel="stylesheet" href="./css/pages/<%= request.getParameter("contentPage") %>.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pre-auth.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/<%= request.getParameter("contentPage") %>.css">
 	</head>
 	<body>
 		<!-- Bannière supérieure -->
 		<div class="banner">
 			<div class="site-title">
-				<img src="<c:url value='/images/icon.png'/>" alt="Icon" class="icon">
+				<img src="${pageContext.request.contextPath}/images/icon.png" alt="Icon" class="icon">
 				CoffeeClasses
 			</div>
 		</div>
@@ -23,7 +22,7 @@
 		<!-- Display error message if it exists -->
 		<c:if test="${not empty errorMessage}">
 			<div class="error-message">
-					<%= request.getAttribute("errorMessage") %>
+					${errorMessage}
 			</div>
 		</c:if>
 
