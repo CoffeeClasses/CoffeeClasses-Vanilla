@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userId", userId.get());
 			response.sendRedirect("/panel");
 		} else {
-			request.setAttribute("errorMessage", "Invalid credentials.");
+			request.setAttribute("errorMessage", "Identifiants invalides.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/login.jsp");
 			dispatcher.forward(request, response);
 		}

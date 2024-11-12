@@ -12,10 +12,18 @@
 		<link rel="stylesheet" href="./css/pages/<%= request.getParameter("contentPage") %>.css">
 	</head>
 	<body>
+		<!-- Bannière supérieure -->
+		<div class="banner">
+			<div class="site-title">
+				<img src="<c:url value='/images/icon.png'/>" alt="Icon" class="icon">
+				CoffeeClasses
+			</div>
+		</div>
+
 		<!-- Display error message if it exists -->
 		<c:if test="${not empty errorMessage}">
 			<div class="error-message">
-					${errorMessage}
+					<%= request.getAttribute("errorMessage") %>
 			</div>
 		</c:if>
 
