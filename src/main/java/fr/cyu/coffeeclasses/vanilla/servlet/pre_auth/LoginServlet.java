@@ -11,11 +11,11 @@ import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String mail = request.getParameter("mail");
 		String password = request.getParameter("password");
 
 		// Attempt to authenticate the user
-		Optional<Integer> userId = UserDAO.getInstance().authenticate(username, password);
+		Optional<Integer> userId = UserDAO.getInstance().authenticate(mail, password);
 
 		if (userId.isPresent()) {
 			HttpSession session = request.getSession();
