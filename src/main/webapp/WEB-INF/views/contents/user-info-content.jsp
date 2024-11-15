@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<h1>Mes informations</h1>
 
-</body>
-</html>
+<h2>Informations personels</h2>
+<p>Nom: </p>
+<p>Prénom: </p>
+<p>Date de naissance: </p>
+
+<h2>Mes cours</h2>

@@ -2,3 +2,5 @@
   <jsp:param name="title" value="User-info" />
   <jsp:param name="contentPage" value="user-info" />
 </jsp:include>
+
+<h1>Hello World</h1>
