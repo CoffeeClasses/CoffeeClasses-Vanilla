@@ -105,16 +105,7 @@
                 <configuration>
                     <container>
                         <containerId>tomcat10x</containerId>
-                        <type>remote</type>
                     </container>
-
-                    <configuration>
-                        <type>runtime</type>
-                        <properties>
-                            <cargo.remote.username>robot</cargo.remote.username>
-                            <cargo.remote.password>robot</cargo.remote.password>
-                        </properties>
-                    </configuration>
                 </configuration>
             </plugin>
         </plugins>
