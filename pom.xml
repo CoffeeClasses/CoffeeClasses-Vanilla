@@ -96,34 +96,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <!-- Use SCSS instead of CSS -->
-            <plugin>
-                <groupId>io.github.cleydyr</groupId>
-                <artifactId>dart-sass-maven-plugin</artifactId>
-                <version>1.4.0</version>
-                <configuration>
-                    <version>1.71.1</version> <!-- Avoid GitHub Rate limit issues -->
-                    <inputFolder>src/main/resources/scss</inputFolder>
-                    <loadPaths>
-                        [${project.basedir}/src/main/resources/scss/pages]
-                    </loadPaths>
-                    <outputFolder>${project.basedir}/src/main/webapp/css</outputFolder>
-                    <style>COMPRESSED</style>
-                    <!-- Only for development -->
-                    <noSourceMap>false</noSourceMap>
-                    <embedSourceMap>true</embedSourceMap>
-                    <embedSources>true</embedSources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-css-using-sass</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>compile-sass</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- Tomcat deployment -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
@@ -146,34 +118,5 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>io.github.cleydyr</groupId>
-                                        <artifactId>dart-sass-maven-plugin</artifactId>
-                                        <versionRange>[1.4.0,)</versionRange>
-                                        <goals>
-                                            <goal>compile-sass</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 </project>
