@@ -6,9 +6,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CoffeeClasses - <%= request.getParameter("title") %></title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pre-auth.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/<%= request.getParameter("contentPage") %>.css">
 	</head>
 	<body>
 		<!-- Bannière supérieure -->
