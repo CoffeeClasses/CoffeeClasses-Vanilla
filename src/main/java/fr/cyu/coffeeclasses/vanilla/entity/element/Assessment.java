@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -15,8 +16,8 @@ public class Assessment {
 		Fields
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 
 	@Column(nullable = false)
 	private String name;
@@ -48,8 +49,8 @@ public class Assessment {
 	}
 
 	// ID
-	public int getId() {
-		return id;
+	public Optional<Integer> getId() {
+		return Optional.ofNullable(id);
 	}
 	private void setId(int id) {
 		this.id = id;

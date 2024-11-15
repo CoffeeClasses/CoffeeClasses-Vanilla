@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import com.password4j.Password;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name = "users")
@@ -13,8 +14,8 @@ public abstract class User {
 		Fields
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 
 	@Column(nullable = false)
 	private String firstName;
@@ -45,8 +46,8 @@ public abstract class User {
 	}
 
 	// ID
-	public int getId() {
-		return id;
+	public Optional<Integer> getId() {
+		return Optional.ofNullable(id);
 	}
 	private void setId(int id) {
 		this.id = id;

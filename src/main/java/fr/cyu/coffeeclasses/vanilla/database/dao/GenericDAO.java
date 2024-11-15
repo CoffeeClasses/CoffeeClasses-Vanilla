@@ -2,8 +2,8 @@ package fr.cyu.coffeeclasses.vanilla.database.dao;
 
 import fr.cyu.coffeeclasses.vanilla.database.HibernateUtil;
 import fr.cyu.coffeeclasses.vanilla.database.exception.DataAccessException;
+import fr.cyu.coffeeclasses.vanilla.database.exception.DataUpdateException;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
@@ -29,7 +29,7 @@ public abstract class GenericDAO<T> {
 	/*
 	 * CRUD operations
 	 */
-	public void save(T entity) throws DataAccessException {
+	public void save(T entity) throws DataUpdateException {
 		Transaction transaction = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
@@ -38,7 +38,7 @@ public abstract class GenericDAO<T> {
 		} catch (Exception e) {
 			if (transaction != null) transaction.rollback();
 			logger.error("Error while saving entity: {}", entity, e);
-			throw new DataAccessException("Error while saving entity", e);
+			throw new DataUpdateException("Error while saving entity", e);
 		}
 	}
 
@@ -60,7 +60,7 @@ public abstract class GenericDAO<T> {
 		} catch (Exception e) {
 			if (transaction != null) transaction.rollback();
 			logger.error("Error while updating entity: {}", entity, e);
-			throw new DataAccessException("Error while updating entity", e);
+			throw new DataUpdateException("Error while updating entity", e);
 		}
 	}
 
@@ -73,7 +73,7 @@ public abstract class GenericDAO<T> {
 		} catch (Exception e) {
 			if (transaction != null) transaction.rollback();
 			logger.error("Error while deleting entity: {}", entity, e);
-			throw new DataAccessException("Error while deleting entity", e);
+			throw new DataUpdateException("Error while deleting entity", e);
 		}
 	}
 
