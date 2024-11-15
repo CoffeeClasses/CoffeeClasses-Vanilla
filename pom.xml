@@ -9,6 +9,9 @@
 
     <properties>
 		<java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -52,6 +55,20 @@
         <!--
 			Expected to be provided by server
 		-->
+        <!-- Jakarta API -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>10.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Servlet -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -79,34 +96,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <!-- Use SCSS instead of CSS -->
-            <plugin>
-                <groupId>io.github.cleydyr</groupId>
-                <artifactId>dart-sass-maven-plugin</artifactId>
-                <version>1.4.0</version>
-                <configuration>
-                    <version>1.71.1</version> <!-- Avoid GitHub Rate limit issues -->
-                    <inputFolder>src/main/resources/scss</inputFolder>
-                    <loadPaths>
-                        [${project.basedir}/src/main/resources/scss/pages]
-                    </loadPaths>
-                    <outputFolder>${project.basedir}/src/main/webapp/css</outputFolder>
-                    <style>COMPRESSED</style>
-                    <!-- Only for development -->
-                    <noSourceMap>false</noSourceMap>
-                    <embedSourceMap>true</embedSourceMap>
-                    <embedSources>true</embedSources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-css-using-sass</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>compile-sass</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- Tomcat deployment -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
@@ -116,16 +105,7 @@
                 <configuration>
                     <container>
                         <containerId>tomcat10x</containerId>
-                        <type>remote</type>
                     </container>
-
-                    <configuration>
-                        <type>runtime</type>
-                        <properties>
-                            <cargo.remote.username>robot</cargo.remote.username>
-                            <cargo.remote.password>robot</cargo.remote.password>
-                        </properties>
-                    </configuration>
                 </configuration>
             </plugin>
         </plugins>
