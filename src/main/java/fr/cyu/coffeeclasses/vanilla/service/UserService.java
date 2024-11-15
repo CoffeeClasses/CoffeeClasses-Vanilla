@@ -1,10 +1,8 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
-import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class UserService {
@@ -22,11 +20,11 @@ public class UserService {
 	 */
 	public Optional<Integer> authenticate(String email, String password) {
 		// Fetch user by email
-		User user = userDAO.findByEmail(email);
+		Optional<User> user = userDAO.findByEmail(email);
 
 		// If user exists and passwords match, return user ID
-		if (user != null && user.checkPassword(password)) {
-			return Optional.of(user.getId());
+		if (user.isPresent() && user.get().checkPassword(password)) {
+			return Optional.of(user.get().getId());
 		}
 		return Optional.empty();
 	}

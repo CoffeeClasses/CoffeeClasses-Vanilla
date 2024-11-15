@@ -19,7 +19,7 @@ public class ApplicationStartupListener implements ServletContextListener {
 		System.out.println("Application starting up...");
 		// Create default users if they don't exist.
 		String adminEmail = "admin@example.com";
-		if (UserDAO.getInstance().findByEmail(adminEmail) == null) {
+		if (UserDAO.getInstance().findByEmail(adminEmail).isEmpty()) {
 			UserService.getInstance().register(
 				Administrator.createAdmin(
 					"Default",
