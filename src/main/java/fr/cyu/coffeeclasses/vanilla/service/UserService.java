@@ -2,8 +2,10 @@ package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
+import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class UserService {
 	private static final UserService INSTANCE = new UserService();
@@ -15,21 +17,21 @@ public class UserService {
 		return INSTANCE;
 	}
 
-	// Temporary ?
-	public void createDefaultAdmin() {
-		String adminEmail = "admin@example.com";
-		if (userDAO.findByEmail(adminEmail) == null) {
-			Administrator admin = Administrator.createAdmin(
-					"Default",
-					"Admin",
-					adminEmail,
-					"admin123",
-					LocalDate.of(2003, 10, 9)
-			);
-			userDAO.save(admin);
-			System.out.println("Default admin user created with email: " + adminEmail);
-		} else {
-			System.out.println("Default admin user already exists.");
+	/*
+		Methods
+	 */
+	public Optional<Integer> authenticate(String email, String password) {
+		// Fetch user by email
+		User user = userDAO.findByEmail(email);
+
+		// If user exists and passwords match, return user ID
+		if (user != null && user.checkPassword(password)) {
+			return Optional.of(user.getId());
 		}
+		return Optional.empty();
+	}
+
+	public void register(User user) {
+		userDAO.save(user);
 	}
 }

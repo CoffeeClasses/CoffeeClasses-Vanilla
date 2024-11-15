@@ -6,7 +6,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.Optional;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
+import fr.cyu.coffeeclasses.vanilla.service.UserService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -15,7 +15,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// Attempt to authenticate the user
-		Optional<Integer> userId = UserDAO.getInstance().authenticate(mail, password);
+		Optional<Integer> userId = UserService.getInstance().authenticate(mail, password);
 
 		if (userId.isPresent()) {
 			HttpSession session = request.getSession();

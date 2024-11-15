@@ -2,6 +2,8 @@ package fr.cyu.coffeeclasses.vanilla.entity.user;
 
 import jakarta.persistence.*;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.time.LocalDate;
 
 @Entity
@@ -76,11 +78,14 @@ public abstract class User {
 	}
 
 	// Password
-	public String getPassword() {
+	public String getRawPassword() {
 		return password;
 	}
+	public Boolean checkPassword(String password) {
+		return BCrypt.checkpw(password, this.password);
+	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
 	// Birth Date
