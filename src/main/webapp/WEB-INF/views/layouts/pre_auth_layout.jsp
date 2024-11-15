@@ -5,6 +5,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="icon" href="${pageContext.request.contextPath}/svg/logo.svg">
 		<title>CoffeeClasses - <%= request.getParameter("title") %></title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pre-auth.css">
@@ -14,8 +15,8 @@
 		<!-- Bannière supérieure -->
 		<div class="banner">
 			<div class="site-title">
-				<img src="${pageContext.request.contextPath}/images/icon.png" alt="Icon" class="icon">
-				CoffeeClasses
+				<img src="${pageContext.request.contextPath}/svg/logo.svg" alt="Icon" class="icon">
+				<i>CoffeeClasses</i>
 			</div>
 		</div>
 
