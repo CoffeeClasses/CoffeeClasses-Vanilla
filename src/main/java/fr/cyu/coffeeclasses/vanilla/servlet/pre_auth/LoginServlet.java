@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 		if (userId.isPresent()) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userId.get());
-			response.sendRedirect("/panel");
+			response.sendRedirect(request.getContextPath() + "/panel");
 		} else {
 			request.setAttribute("errorMessage", "Identifiants invalides.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/login.jsp");
