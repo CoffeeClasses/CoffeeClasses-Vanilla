@@ -22,11 +22,11 @@ public class ApplicationStartupListener implements ServletContextListener {
 		if (UserDAO.getInstance().findByEmail(adminEmail) == null) {
 			UserService.getInstance().register(
 				Administrator.createAdmin(
-						"Default",
-						"Admin",
-						adminEmail,
-						"admin123",
-						LocalDate.of(2003, 10, 9)
+					"Default",
+					"Admin",
+					adminEmail,
+					"admin123",
+					LocalDate.of(2003, 10, 9)
 				)
 			);
 			System.out.println("Default admin user created with email: " + adminEmail);

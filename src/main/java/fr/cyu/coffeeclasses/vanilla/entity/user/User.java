@@ -1,8 +1,7 @@
 package fr.cyu.coffeeclasses.vanilla.entity.user;
 
 import jakarta.persistence.*;
-
-import org.mindrot.jbcrypt.BCrypt;
+import com.password4j.Password;
 
 import java.time.LocalDate;
 
@@ -78,14 +77,22 @@ public abstract class User {
 	}
 
 	// Password
-	public String getRawPassword() {
-		return password;
-	}
 	public Boolean checkPassword(String password) {
-		return BCrypt.checkpw(password, this.password);
+		if (Password.check(password, this.password).withArgon2()) {
+			return true;
+		} else {
+			// Legacy plain text passwords
+			if (!password.startsWith("$argon2") && password.equals(this.password)) {
+				// We hash it while we're at it.
+				setPassword(password);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 	public void setPassword(String password) {
-		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+		this.password = Password.hash(password).addRandomSalt().withArgon2().getResult();
 	}
 
 	// Birth Date
