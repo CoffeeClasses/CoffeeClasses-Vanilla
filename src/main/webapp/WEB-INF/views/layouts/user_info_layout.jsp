@@ -16,7 +16,6 @@
 				CoffeeClasses
 			</div>
 		</div>
-		<p><%System.out.println(request.toString()); %></p>
 		<!-- Display error message if it exists -->
 		<c:if test="${not empty errorMessage}">
 			<div class="error-message">
