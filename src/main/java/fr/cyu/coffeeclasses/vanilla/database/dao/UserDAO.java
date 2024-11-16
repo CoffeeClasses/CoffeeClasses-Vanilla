@@ -42,4 +42,5 @@ public class UserDAO extends GenericDAO<User> {
 			throw new DataAccessException("Error while finding user by email: " + email, e);
 		}
 	}
+	
 }
