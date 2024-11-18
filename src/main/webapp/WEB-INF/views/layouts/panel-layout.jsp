@@ -45,7 +45,7 @@
 		<div class="user-actions">
 			<span class="username">${username}</span>
 			<form action="${pageContext.request.contextPath}/logout" method="post" class="logout-form">
-				<button type="submit" class="logout-button">Logout</button>
+				<button type="submit" class="logout-button">Déconnexion</button>
 			</form>
 		</div>
 	</header>
