@@ -1,3 +1,11 @@
+body {
+    background: radial-gradient(circle at top, rgb(243, 243, 243) 90%, rgb(212, 200, 193) 99%);
+}
+
+main {
+    flex-grow: 1;
+}
+
 /* Header Styles */
 .panel-header {
     display: flex;

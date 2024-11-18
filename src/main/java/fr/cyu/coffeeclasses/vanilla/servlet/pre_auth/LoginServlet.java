@@ -1,5 +1,6 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.pre_auth;
 
+import fr.cyu.coffeeclasses.vanilla.database.exception.DataNonsenseException;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 
-			session.setAttribute("userId", currentUser.getId());
+			session.setAttribute("userId", currentUser.getId().orElseThrow(() -> new DataNonsenseException("ID missing in user extracted from database.")));
 			session.setAttribute("username", currentUser.getFirstName() + " " + currentUser.getLastName());
 			session.setAttribute("userType", currentUser.getTypeString());
 
