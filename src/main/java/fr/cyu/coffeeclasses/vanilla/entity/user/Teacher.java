@@ -13,7 +13,7 @@ public class Teacher extends User {
 	/*
 		Fields
 	 */
-	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<>();
 
 	/*
