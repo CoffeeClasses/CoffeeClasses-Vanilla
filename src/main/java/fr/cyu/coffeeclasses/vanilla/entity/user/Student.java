@@ -30,6 +30,11 @@ public class Student extends User {
 		super(firstName, lastName, email, password, birthDate);
 	}
 
+	//
+	public static Student create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+		return new Student(firstName, lastName, email, password, birthDate);
+	}
+
 	// Enrollments
 	public Set<Enrollment> getEnrollments() {
 		return enrollments;

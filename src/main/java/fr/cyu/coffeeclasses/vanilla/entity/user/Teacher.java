@@ -24,6 +24,12 @@ public class Teacher extends User {
 		super(firstName, lastName, email, password, birthDate);
 	}
 
+	//
+	//
+	public static Teacher create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+		return new Teacher(firstName, lastName, email, password, birthDate);
+	}
+
 	// Courses
 	public Set<Course> getCourses() {
 		return courses;

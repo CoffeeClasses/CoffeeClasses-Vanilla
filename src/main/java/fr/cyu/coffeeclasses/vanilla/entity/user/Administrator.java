@@ -11,8 +11,8 @@ public class Administrator extends User {
 		super(firstName, lastName, email, password, birthDate);
 	}
 
-	// Temporary
-	public static Administrator createAdmin(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+	//
+	public static Administrator create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
 		return new Administrator(firstName, lastName, email, password, birthDate);
 	}
 }
