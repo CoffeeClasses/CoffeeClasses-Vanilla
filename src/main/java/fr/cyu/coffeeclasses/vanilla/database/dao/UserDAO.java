@@ -4,9 +4,7 @@ import fr.cyu.coffeeclasses.vanilla.database.HibernateUtil;
 import fr.cyu.coffeeclasses.vanilla.database.exception.DataAccessException;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

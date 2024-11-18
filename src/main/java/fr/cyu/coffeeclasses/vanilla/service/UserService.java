@@ -19,13 +19,13 @@ public class UserService {
 	/* 
 	 * Methods
 	 */
-	public Optional<Integer> authenticate(String email, String password) {
+	public Optional<User> authenticate(String email, String password) {
 		// Fetch user by email
 		Optional<User> user = userDAO.findByEmail(email);
 
 		// If user exists and passwords match, return user ID
 		if (user.isPresent() && user.get().checkPassword(password)) {
-			return Optional.of(user.get().getId().orElseThrow(() -> new DataNonsenseException("An object located from the database should always have an ID.")));
+			return user;
 		}
 		return Optional.empty();
 	}

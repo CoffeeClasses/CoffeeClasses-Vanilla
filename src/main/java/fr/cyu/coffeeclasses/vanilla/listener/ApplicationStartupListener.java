@@ -1,5 +1,6 @@
 package fr.cyu.coffeeclasses.vanilla.listener;
 
+import fr.cyu.coffeeclasses.vanilla.database.dao.AdministratorDAO;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -17,21 +18,20 @@ public class ApplicationStartupListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		System.out.println("Application starting up...");
-		// Create default users if they don't exist.
-		String adminEmail = "admin@example.com";
-		if (UserDAO.getInstance().findByEmail(adminEmail).isEmpty()) {
+		// Create default admin user if no admin is present.
+		if (AdministratorDAO.getInstance().getAll().isEmpty()) {
 			UserService.getInstance().register(
 				Administrator.createAdmin(
 					"Default",
 					"Admin",
-					adminEmail,
+						"admin@example.com",
 					"admin123",
 					LocalDate.of(2003, 10, 9)
 				)
 			);
-			System.out.println("Default admin user created with email: " + adminEmail);
+			System.out.println("Default admin user created.");
 		} else {
-			System.out.println("Default admin user already exists.");
+			System.out.println("Admin users already present.");
 		}
 	}
 

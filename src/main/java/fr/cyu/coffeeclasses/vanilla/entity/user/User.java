@@ -103,4 +103,11 @@ public abstract class User {
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
+
+	/*
+	 * Additional
+	 */
+	public String getTypeString () {
+		return this.getClass().getSimpleName();
+	}
 }
