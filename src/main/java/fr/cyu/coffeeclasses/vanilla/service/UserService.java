@@ -16,8 +16,8 @@ public class UserService {
 	// DAO
 	private final UserDAO userDAO = UserDAO.getInstance();
 
-	/*
-		Methods
+	/* 
+	 * Methods
 	 */
 	public Optional<Integer> authenticate(String email, String password) {
 		// Fetch user by email

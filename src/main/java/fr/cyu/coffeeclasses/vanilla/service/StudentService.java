@@ -1,6 +1,6 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
+import fr.cyu.coffeeclasses.vanilla.database.dao.StudentDAO;
 
 public class StudentService {
 	// Singleton
@@ -10,9 +10,9 @@ public class StudentService {
 		return INSTANCE;
 	}
 	// DAO
-	private final UserDAO userDAO = UserDAO.getInstance();
+	private final StudentDAO studentDAO = StudentDAO.getInstance();
 
-	/*
-		Methods
+	/* 
+	 * Methods
 	 */
 }

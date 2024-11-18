@@ -51,7 +51,7 @@ public abstract class GenericDAO<T> {
 		}
 	}
 
-	public void update(T entity) throws DataAccessException {
+	public void update(T entity) throws DataUpdateException {
 		Transaction transaction = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
@@ -64,7 +64,7 @@ public abstract class GenericDAO<T> {
 		}
 	}
 
-	public void delete(T entity) throws DataAccessException {
+	public void delete(T entity) throws DataUpdateException {
 		Transaction transaction = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
@@ -90,6 +90,16 @@ public abstract class GenericDAO<T> {
 		} catch (Exception e) {
 			logger.error("Error while retrieving all entities", e);
 			throw new DataAccessException("Error while retrieving all entities", e);
+		}
+	}
+
+	public void deleteById(int id) throws DataAccessException, DataUpdateException {
+		Optional<T> entity = findById(id);
+		if (entity.isPresent()) {
+			delete(entity.get());
+		} else {
+			logger.error("Could not find entity to delete by ID : {}", id);
+			throw new DataAccessException("Could not locate entity to delete by ID : " + id);
 		}
 	}
 }
