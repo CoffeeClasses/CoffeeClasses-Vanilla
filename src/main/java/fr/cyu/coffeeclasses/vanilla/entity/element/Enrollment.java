@@ -4,6 +4,8 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 @Table(name = "enrollments")
 public class Enrollment {
@@ -11,8 +13,8 @@ public class Enrollment {
 		Fields
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 
 	// Which student ?
 	@ManyToOne
@@ -32,8 +34,8 @@ public class Enrollment {
 	}
 
 	// ID
-	public int getId() {
-		return id;
+	public Optional<Integer> getId() {
+		return Optional.ofNullable(id);
 	}
 	private void setId(int id) {
 		this.id = id;

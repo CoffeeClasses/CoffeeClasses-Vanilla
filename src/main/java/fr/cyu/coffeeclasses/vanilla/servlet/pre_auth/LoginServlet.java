@@ -1,12 +1,13 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.pre_auth;
 
+import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.Optional;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
+import fr.cyu.coffeeclasses.vanilla.service.UserService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -15,11 +16,17 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// Attempt to authenticate the user
-		Optional<Integer> userId = UserDAO.getInstance().authenticate(mail, password);
+		Optional<User> user = UserService.getInstance().authenticate(mail, password);
 
-		if (userId.isPresent()) {
+		if (user.isPresent()) {
+			User currentUser = user.get();
+
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", userId.get());
+
+			session.setAttribute("userId", currentUser.getId());
+			session.setAttribute("username", currentUser.getFirstName() + " " + currentUser.getLastName());
+			session.setAttribute("userType", currentUser.getTypeString());
+
 			response.sendRedirect(request.getContextPath() + "/panel");
 		} else {
 			request.setAttribute("errorMessage", "Identifiants invalides.");

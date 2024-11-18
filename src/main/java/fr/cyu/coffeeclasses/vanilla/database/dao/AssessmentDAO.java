@@ -11,5 +11,4 @@ public class AssessmentDAO extends GenericDAO<Assessment> {
 	public static AssessmentDAO getInstance() {
 		return INSTANCE;
 	}
-	
 }

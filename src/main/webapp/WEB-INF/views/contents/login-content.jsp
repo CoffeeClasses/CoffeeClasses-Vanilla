@@ -1,11 +1,16 @@
 <form action="${pageContext.request.contextPath}/login" method="post">
-	<h2>Login</h2>
-	<label for="mail">Mail :</label>
-	<input type="text" id="mail" name="mail" required>
+	<h2>Connexion au serveur</h2>
 
-	<label for="password">Password :</label>
-	<input type="password" id="password" name="password" required>
+	<div class="form-group">
+		<label for="mail">E-mail :</label>
+		<input type="text" id="mail" name="mail" required>
+	</div>
 
-	<button type="submit">Login</button>
-	<!-- p><a href="${pageContext.request.contextPath}/password-restore">Forgot password?</a></p -->
+	<div class="form-group">
+		<label for="password">Mot de passe :</label>
+		<input type="password" id="password" name="password" required>
+	</div>
+
+	<button type="submit">Se connecter</button>
+	<!-- p><a href="${pageContext.request.contextPath}/password-restore">Vous avez oublié votre mot de passe ?</a></p -->
 </form>

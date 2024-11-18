@@ -1,8 +1,10 @@
 package fr.cyu.coffeeclasses.vanilla.entity.user;
 
 import jakarta.persistence.*;
+import com.password4j.Password;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name = "users")
@@ -12,8 +14,8 @@ public abstract class User {
 		Fields
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 
 	@Column(nullable = false)
 	private String firstName;
@@ -44,8 +46,8 @@ public abstract class User {
 	}
 
 	// ID
-	public int getId() {
-		return id;
+	public Optional<Integer> getId() {
+		return Optional.ofNullable(id);
 	}
 	private void setId(int id) {
 		this.id = id;
@@ -76,11 +78,22 @@ public abstract class User {
 	}
 
 	// Password
-	public String getPassword() {
-		return password;
+	public Boolean checkPassword(String password) {
+		if (Password.check(password, this.password).withArgon2()) {
+			return true;
+		} else {
+			// Legacy plain text passwords
+			if (!password.startsWith("$argon2") && password.equals(this.password)) {
+				// We hash it while we're at it.
+				setPassword(password);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Password.hash(password).addRandomSalt().withArgon2().getResult();
 	}
 
 	// Birth Date
@@ -89,5 +102,12 @@ public abstract class User {
 	}
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	/*
+	 * Additional
+	 */
+	public String getTypeString () {
+		return this.getClass().getSimpleName();
 	}
 }

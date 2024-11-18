@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "grades",  uniqueConstraints = {
@@ -17,8 +18,8 @@ public class Grade {
 		Fields
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 
 	// For what assessment ?
 	@ManyToOne(optional = false)
@@ -48,8 +49,8 @@ public class Grade {
 	}
 
 	// ID
-	public int getId() {
-		return id;
+	public Optional<Integer> getId() {
+		return Optional.ofNullable(id);
 	}
 	private void setId(int id) {
 		this.id = id;
@@ -75,7 +76,7 @@ public class Grade {
 	public double getValue() {
 		return value;
 	}
-	public void setValue(double value) {
+	public void setValue(double value) throws IllegalArgumentException {
 		if (value > 0 && value <= assessment.getMaximum()) {
 			this.value = value;
 		} else {

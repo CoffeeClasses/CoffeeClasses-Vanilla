@@ -1,1 +1,8 @@
-body{margin:0;padding:0;display:flex;flex-direction:column;font-family:Arial,sans-serif;min-height:100vh}/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/main.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA,KACE,SACA,UACA,aACA,sBACA,6BACA%22,%22file%22:%22main.css%22,%22sourcesContent%22:%5B%22body%7B%5Cn%20%20margin:0;%5Cn%20%20padding:0;%5Cn%20%20display:flex;%5Cn%20%20flex-direction:column;%5Cn%20%20font-family:Arial,sans-serif;%5Cn%20%20min-height:100vh%5Cn%7D%22%5D%7D */
+body{
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    font-family:Arial,sans-serif;
+    min-height:100vh
+}

@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 
-	private static SessionFactory buildSessionFactory() {
+	private static SessionFactory buildSessionFactory() throws ExceptionInInitializerError {
 		try {
 			return new Configuration().configure().buildSessionFactory();
 		} catch (Throwable ex) {
