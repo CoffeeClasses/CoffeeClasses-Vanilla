@@ -1,6 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="java.security.InvalidParameterException" %>
+
+<jsp:useBean id="user" scope="request" type="fr.cyu.coffeeclasses.vanilla.entity.user.User"/>
+<%
+	request.setAttribute("userType", user.getClass().getSimpleName());
+	request.setAttribute("username", user.getFirstName() + " " + user.getLastName());
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,24 +28,24 @@
 
 		<!-- Liens de navigation -->
 		<div class="panel-links">
-			<a href="${pageContext.request.contextPath}/panel">Accueil</a>
+			<a href="${pageContext.request.contextPath}/panel/home">Accueil</a>
 			<c:choose>
 				<c:when test="${userType == 'Administrator'}">
-					<a href="${pageContext.request.contextPath}/admin/users">Utilisateurs</a>
-					<a href="${pageContext.request.contextPath}/admin/courses">Cours</a>
+					<a href="${pageContext.request.contextPath}/panel/admin/users">Utilisateurs</a>
+					<a href="${pageContext.request.contextPath}/panel/admin/courses">Cours</a>
 				</c:when>
 				<c:when test="${userType == 'Teacher'}">
-					<a href="${pageContext.request.contextPath}/teacher/courses">Mes cours</a>
-					<a href="${pageContext.request.contextPath}/teacher/grades">Mes évaluations</a>
+					<a href="${pageContext.request.contextPath}/panel/teacher/courses">Mes cours</a>
+					<a href="${pageContext.request.contextPath}/panel/teacher/grades">Mes évaluations</a>
 				</c:when>
 				<c:when test="${userType == 'Student'}">
-					<a href="${pageContext.request.contextPath}/student/courses">Mes cours</a>
-					<a href="${pageContext.request.contextPath}/student/grades">Mes résultats</a>
+					<a href="${pageContext.request.contextPath}/panel/student/courses">Mes cours</a>
+					<a href="${pageContext.request.contextPath}/panel/student/grades">Mes résultats</a>
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
 			</c:choose>
-			<a href="${pageContext.request.contextPath}/profile">Profil</a>
+			<a href="${pageContext.request.contextPath}/panel/profile">Profil</a>
 		</div>
 
 		<!-- Nom d'utilisateur et déconnexion -->
@@ -58,7 +65,7 @@
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage + "-content.jsp");
 				dispatcher.include(request, response);
 			} else {
-				throw new InvalidParameterException("Pre-Auth layout requested with no content.");
+				throw new InvalidParameterException("Panel layout requested with no content.");
 			}
 		%>
 	</main>

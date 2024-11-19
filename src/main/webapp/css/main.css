@@ -1,3 +1,25 @@
+/* This CSS file defines variables and styles used through THE ENTIRE website. */
+
+
+/* Variables */
+:root {
+    --primary-color: #f90;
+    --stronger-color: #ff6a00;
+
+    --primary-background-gradient: linear-gradient(to right, var(--primary-color) 0%, var(--stronger-color) 100%);
+    --secondary-background-gradient: radial-gradient(circle at top left, #f6f6f6 50%, gray 190%);
+
+    --non-interactive-POT-color: #2980b9;
+    --interactive-POT-color: #3498db;
+
+    --default-shadow: 0 .1em .5em rgba(0,0,0,.8);
+}
+
+/* Settings */
+* {
+    box-sizing: border-box;
+}
+
 body{
     margin:0;
     padding:0;

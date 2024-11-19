@@ -87,8 +87,8 @@ public class Assessment {
 	public void setGrades(Set<Grade> grades) {
 		this.grades = grades;
 	}
-	public void addGrade(Student student, double value) {
-		grades.add(new Grade(this, student, value));
+	public void addGrade(Enrollment enrollment, double value) {
+		grades.add(new Grade(this, enrollment, value));
 	}
 
 	// Maximum value

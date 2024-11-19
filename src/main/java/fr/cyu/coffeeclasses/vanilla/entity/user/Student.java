@@ -16,11 +16,8 @@ public class Student extends User {
 	/*
 		Fields
 	 */
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Enrollment> enrollments = new HashSet<>();
-
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Grade> grades = new HashSet<>();
 
 	/*
 		Methods
@@ -28,6 +25,11 @@ public class Student extends User {
 	protected Student() {}
 	protected Student(String firstName, String lastName, String email, String password, LocalDate birthDate) {
 		super(firstName, lastName, email, password, birthDate);
+	}
+
+	//
+	public static Student create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+		return new Student(firstName, lastName, email, password, birthDate);
 	}
 
 	// Enrollments
@@ -42,20 +44,5 @@ public class Student extends User {
 	}
 	public void removeEnrollment(Enrollment enrollment) {
 		enrollments.remove(enrollment);
-	}
-
-	// Grades
-	public Set<Grade> getGrades() {
-		return grades;
-	}
-	public void setGrades(Set<Grade> grades) {
-		this.grades = grades;
-	}
-	public void addGrade(Assessment assessment, double value) {
-		Grade grade = new Grade(assessment, this, value);
-		grades.add(grade);
-	}
-	public void removeGrade(Grade grade) {
-		grades.remove(grade);
 	}
 }

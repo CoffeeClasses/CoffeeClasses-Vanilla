@@ -10,15 +10,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/panel")
+@WebServlet("/panel/home")
 public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Check if user is connected
-		HttpSession session = request.getSession();
-
-		if (session.getAttribute("userId") != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/home.jsp");
-			dispatcher.forward(request, response);
-		} else response.sendRedirect(request.getContextPath() + "/login");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/home.jsp");
+		dispatcher.forward(request, response);
 	}
 }

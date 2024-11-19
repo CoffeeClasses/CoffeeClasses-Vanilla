@@ -25,9 +25,9 @@ public class Grade {
 	@ManyToOne(optional = false)
 	private Assessment assessment;
 
-	// With which student ?
+	// Which enrollment (student + course)?
 	@ManyToOne(optional = false)
-	private Student student;
+	private Enrollment enrollment;
 
 	// What did they get ?
 	@Column(nullable = false)
@@ -42,9 +42,9 @@ public class Grade {
 		Methods
 	 */
 	protected Grade() {}
-	public Grade(Assessment assessment, Student student, double value) {
+	public Grade(Assessment assessment, Enrollment enrollment, double value) {
 		setAssessment(assessment);
-		setStudent(student);
+		setEnrollment(enrollment);
 		setValue(value);
 	}
 
@@ -64,12 +64,12 @@ public class Grade {
 		this.assessment = assessment;
 	}
 
-	// Student
-	public Student getStudent() {
-		return student;
+	// Enrollment (student + course)
+	public Enrollment getEnrollment() {
+		return enrollment;
 	}
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setEnrollment(Enrollment enrollment) {
+		this.enrollment = enrollment;
 	}
 
 	// Value

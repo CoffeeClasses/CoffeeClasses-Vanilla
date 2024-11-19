@@ -13,7 +13,7 @@ public class Teacher extends User {
 	/*
 		Fields
 	 */
-	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<>();
 
 	/*
@@ -22,6 +22,12 @@ public class Teacher extends User {
 	protected Teacher() {}
 	protected Teacher(String firstName, String lastName, String email, String password, LocalDate birthDate) {
 		super(firstName, lastName, email, password, birthDate);
+	}
+
+	//
+	//
+	public static Teacher create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+		return new Teacher(firstName, lastName, email, password, birthDate);
 	}
 
 	// Courses

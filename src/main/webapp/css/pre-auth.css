@@ -9,7 +9,7 @@ body{
         background-position: 0 0;
     }
     100% {
-        background-position: 100% 100%; /* Adjusts the background to move diagonally */
+        background-position: 100% 100%;
     }
 }
 
@@ -18,10 +18,10 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:radial-gradient(circle at top left, #f6f6f6 50%, gray 190%);
+    background: var(--secondary-background-gradient);
     padding:10px 20px;
-    border-bottom:3px solid #f90;
-    box-shadow:0 .1em .5em rgba(0,0,0,.8)
+    border-bottom: 3px solid var(--primary-color);
+    box-shadow: var(--default-shadow);
 }
 .banner .site-title{
     display: flex;
@@ -48,7 +48,7 @@ body{
     background-color:#fff;
     padding:2vw;
     border-radius:0.5em;
-    box-shadow:0 .1em .5em rgba(0,0,0,.8);
+    box-shadow: var(--default-shadow);
     max-width:400px;
     width:100%;
     text-align:center

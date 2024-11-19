@@ -20,17 +20,13 @@ public class LoginServlet extends HttpServlet {
 		Optional<User> user = UserService.getInstance().authenticate(mail, password);
 
 		if (user.isPresent()) {
-			User currentUser = user.get();
-
 			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.get().getId().orElseThrow(() -> new DataNonsenseException("ID missing in user extracted from database.")));
 
-			session.setAttribute("userId", currentUser.getId().orElseThrow(() -> new DataNonsenseException("ID missing in user extracted from database.")));
-			session.setAttribute("username", currentUser.getFirstName() + " " + currentUser.getLastName());
-			session.setAttribute("userType", currentUser.getTypeString());
-
-			response.sendRedirect(request.getContextPath() + "/panel");
+			response.sendRedirect(request.getContextPath() + "/panel/home");
 		} else {
 			request.setAttribute("errorMessage", "Identifiants invalides.");
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/login.jsp");
 			dispatcher.forward(request, response);
 		}
