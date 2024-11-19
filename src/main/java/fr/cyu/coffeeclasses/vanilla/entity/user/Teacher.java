@@ -1,12 +1,14 @@
 package fr.cyu.coffeeclasses.vanilla.entity.user;
 
-import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
-
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Teacher extends User {
