@@ -1,5 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.user.User" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.user.Teacher" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.user.Student" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.element.Course" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment" %>
+<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.element.Grade" %>
+<jsp:useBean id="user" scope="request" type="fr.cyu.coffeeclasses.vanilla.entity.user.User"/>
 
 <div class="box">
 	<h1>Mes informations</h1>
@@ -10,47 +18,46 @@
 	<p><strong>Adresse e-mail :</strong> ${user.email}</p>
 	<p><strong>Date de naissance :</strong> ${user.birthDate}</p>
 
-	<c:if test="${userType == 'Teacher'}">
+	<% if (user instanceof Teacher) { Teacher teacher = (Teacher) user; %>
 		<h2>Cours</h2>
-		<c:choose>
-			<c:when test="${not empty user.courses}">
-				<ul>
-					<c:forEach var="course" items="${user.courses}">
-						<li>${course.name}</li>
-					</c:forEach>
-				</ul>
-			</c:when>
-			<c:otherwise>
-				<p class="empty">Aucun cours assigné.</p>
-			</c:otherwise>
-		</c:choose>
-	</c:if>
+		<%
+			Set<Course> courses = teacher.getCourses();
+			if (!courses.isEmpty()) {
+		%>
+			<ul>
+				<% for (Course course : courses) { %>
+					<li><%= course.getName() %></li>
+				<% } %>
+			</ul>
+		<% } else { %>
+			<p class="empty">Aucun cours assigné.</p>
+		<% } %>
+	<% } %>
 
-	<c:if test="${userType == 'Student'}">
+	<!-- Check if user is a Student -->
+	<% if (user instanceof Student) { Student student = (Student) user; %>
 		<h2>Cours et évaluations</h2>
-		<c:choose>
-			<c:when test="${not empty user.enrollments}">
-				<c:forEach var="enrollment" items="${user.enrollments}">
+		<%
+			Set<Enrollment> enrollments = student.getEnrollments();
+			if (!enrollments.isEmpty()) {
+				for (Enrollment enrollment : enrollments) {
+		%>
 					<div class="course-box">
-						<h3>${enrollment.course.name}</h3>
+						<h3><%= enrollment.getCourse().getName() %></h3>
+						<!-- Liste des notes -->
 						<ul>
-							<c:choose>
-								<c:when test="${not empty enrollment.grades}">
-									<c:forEach var="grade" items="${enrollment.grades}">
-										<li>${grade.assessment.name}: ${grade.value}/${grade.assessment.maximum}</li>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<li class="empty">Aucune note disponible.</li>
-								</c:otherwise>
-							</c:choose>
+							<% if (enrollment.getGrades() != null && !enrollment.getGrades().isEmpty()) { %>
+								<% for (Grade grade : enrollment.getGrades()) { %>
+									<li><%= grade.getAssessment().getName() %>: <%= grade.getValue() %>/<%= grade.getAssessment().getMaximum() %></li>
+								<% } %>
+							<% } else { %>
+							<li class="empty">Aucune note disponible.</li>
+							<% } %>
 						</ul>
 					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<p class="empty">Aucun cours assigné.</p>
-			</c:otherwise>
-		</c:choose>
-	</c:if>
+				<% } %>
+		<% } else { %>
+			<p class="empty">Aucun cours assigné.</p>
+		<% } %>
+	<% } %>
 </div>

@@ -19,9 +19,6 @@ public class Student extends User {
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Enrollment> enrollments = new HashSet<>();
 
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<Grade> grades = new HashSet<>();
-
 	/*
 		Methods
 	 */
@@ -47,29 +44,5 @@ public class Student extends User {
 	}
 	public void removeEnrollment(Enrollment enrollment) {
 		enrollments.remove(enrollment);
-	}
-
-	// Grades
-	public Set<Grade> getGrades() {
-		return grades;
-	}
-	public void setGrades(Set<Grade> grades) {
-		this.grades = grades;
-	}
-	public void addGrade(Assessment assessment, double value) {
-		Grade grade = new Grade(assessment, this, value);
-		grades.add(grade);
-	}
-	public void removeGrade(Grade grade) {
-		grades.remove(grade);
-	}
-	public Set<Grade> getGradesByCourse(Course c){
-		Set<Grade> courseGrades = new HashSet<>();
-		for(Grade g: grades) {
-			if(g.getAssessment().getCourse().equals(c)) {
-				courseGrades.add(g);
-			}
-		}
-		return courseGrades;
 	}
 }

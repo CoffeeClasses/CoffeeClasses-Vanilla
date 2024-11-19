@@ -18,30 +18,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/profile")
+@WebServlet("/panel/profile")
 public class ProfileServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
-		String userType = (String) session.getAttribute("userType");
-
-		if (userId == null || userType == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
-			return;
-		}
-
-		// Fetch user details
-		User user = UserDAO.getInstance().findById(userId).orElseThrow(() -> new DataNonsenseException("User not found while requesting for info."));
-		if (user.getClass() == Teacher.class) {
-			request.setAttribute("courses", ((Teacher) user).getCourses());
-		} else if (user.getClass() == Student.class) {
-			request.setAttribute("enrollments", ((Student) user).getEnrollments());
-		}
-		request.setAttribute("user", user);
-		request.setAttribute("userType", userType);
-
-		// Forward to the profile page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/profile.jsp");
 		dispatcher.forward(request, response);
 	}

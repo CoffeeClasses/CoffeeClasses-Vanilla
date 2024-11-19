@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<jsp:useBean id="user" scope="request" type="fr.cyu.coffeeclasses.vanilla.entity.user.User"/>
+<% request.setAttribute("userType", user.getClass().getSimpleName()); %>
+
 <div class="home-content">
 	<div class="site-description">
 		<h1>Bienvenue sur CoffeeClasses</h1>

@@ -13,11 +13,11 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: radial-gradient(circle at top left, #f6f6f6 50%, gray 190%);
+    background: var(--secondary-background-gradient);
     padding: 15px 30px;
     color: #000000;
-    border-bottom:3px solid #f90;
-    box-shadow:0 .1em .5em rgba(0,0,0,.8)
+    border-bottom:3px solid var(--primary-color);
+    box-shadow: var(--default-shadow);
 }
 
 .project-title {
