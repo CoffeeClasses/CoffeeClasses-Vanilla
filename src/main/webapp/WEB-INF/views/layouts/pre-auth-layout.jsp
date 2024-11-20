@@ -34,7 +34,7 @@
 					String contentPage = request.getParameter("contentPage");
 					if (contentPage != null) {
 						out.flush();
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage + "-content.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/pre-auth/" + contentPage + "-content.jsp");
 						dispatcher.include(request, response);
 					} else {
 						throw new InvalidParameterException("Pre-Auth layout requested with no content.");

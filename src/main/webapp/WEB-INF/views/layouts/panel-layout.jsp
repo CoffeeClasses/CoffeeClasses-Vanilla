@@ -62,7 +62,7 @@
 			String contentPage = request.getParameter("contentPage");
 			if (contentPage != null) {
 				out.flush();
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage + "-content.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/panel/" + contentPage + "-content.jsp");
 				dispatcher.include(request, response);
 			} else {
 				throw new InvalidParameterException("Panel layout requested with no content.");
