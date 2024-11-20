@@ -3,4 +3,21 @@
 		 xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                              https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
 		 version="5.0">
+
+	<filter-mapping>
+		<filter-name>userFilter</filter-name>
+		<url-pattern>/panel/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>adminFilter</filter-name>
+		<url-pattern>/panel/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>teacherFilter</filter-name>
+		<url-pattern>/panel/teacher/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>studentFilter</filter-name>
+		<url-pattern>/panel/student/*</url-pattern>
+	</filter-mapping>
 </web-app>
