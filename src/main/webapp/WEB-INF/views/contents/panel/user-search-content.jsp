@@ -38,12 +38,13 @@
 						<th>Nom</th>
 						<th>E-mail</th>
 						<th>Rôle</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<% for (User user : users) { %>
 						<tr>
-							<td><%= user.getId().orElseThrow(() -> new DataNonsenseException("Uninitialized user " + user.getEmail() + " in database ?")) %></td>
+							<td><%= user.getId() %></td>
 							<td><%= user.getFirstName() + " " + user.getLastName() %></td>
 							<td><%= user.getEmail() %></td>
 							<!-- Role -->
@@ -52,6 +53,10 @@
 								<% } else if (user instanceof Teacher) { %>Professeur
 								<% } else if (user instanceof Administrator) { %>Administrateur
 								<% } else { throw new DataNonsenseException("User " + user.getId() + "  is not using a valid role."); } %>
+							</td>
+							<!-- Lien -->
+							<td>
+								<a href="${pageContext.request.contextPath}/panel/admin/users/edit?id=<%= user.getId() %>">Modifier</a>
 							</td>
 						</tr>
 					<% } %>

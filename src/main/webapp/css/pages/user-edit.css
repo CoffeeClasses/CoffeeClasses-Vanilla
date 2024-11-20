@@ -85,6 +85,15 @@
     background-color: #3498db;
 }
 
+/* Delete Button */
+.search-users form[action*="delete"] button {
+    background-color: #e74c3c;
+}
+
+.search-users form[action*="delete"] button:hover {
+    background-color: #c0392b;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .search-users {

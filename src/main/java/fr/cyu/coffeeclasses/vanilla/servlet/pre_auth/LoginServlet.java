@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (user.isPresent()) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", user.get().getId().orElseThrow(() -> new DataNonsenseException("ID missing in user extracted from database.")));
+			session.setAttribute("userId", user.get().getId());
 
 			response.sendRedirect(request.getContextPath() + "/panel/home");
 		} else {

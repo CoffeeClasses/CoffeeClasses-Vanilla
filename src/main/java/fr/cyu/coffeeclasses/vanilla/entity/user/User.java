@@ -46,8 +46,8 @@ public abstract class User {
 	}
 
 	// ID
-	public Optional<Integer> getId() {
-		return Optional.ofNullable(id);
+	public int getId() {
+		return id;
 	}
 	private void setId(int id) {
 		this.id = id;

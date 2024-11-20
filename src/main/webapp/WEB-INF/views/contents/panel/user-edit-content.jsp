@@ -50,4 +50,9 @@
 
 		<button type="submit">Enregistrer</button>
 	</form>
+
+	<form action="${pageContext.request.contextPath}/panel/admin/users/delete" method="get">
+		<input type="hidden" name="id" value="${target.id}" />
+		<button type="submit">Supprimer</button>
+	</form>
 </div>

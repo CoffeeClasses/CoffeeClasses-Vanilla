@@ -33,4 +33,8 @@ public class UserService {
 	public void register(User user) {
 		userDAO.save(user);
 	}
+
+	public void unregister(User user) {
+		userDAO.delete(user);
+	}
 }
