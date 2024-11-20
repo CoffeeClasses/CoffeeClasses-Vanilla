@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,13 +31,13 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
  * Servlet implementation class Assign
  */
 @WebServlet("/assessment")
-public class Assign extends HttpServlet {
+public class AssignServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Assign() {
+    public AssignServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,12 +50,18 @@ public class Assign extends HttpServlet {
 		try {
 			Integer id = (Integer) session.getAttribute("userId");
 			Teacher loggedTeacher = TeacherDAO.getInstance().findById(id).orElseThrow();
-			request.setAttribute("courses", loggedTeacher.getCourses());
+			Set<Course> teacherCourses = loggedTeacher.getCourses();
+			Set<Assessment> teacherAssessments = new HashSet<>();
+			for(Course c: teacherCourses) {
+				teacherAssessments.addAll(c.getAssessments());
+			}
+			request.setAttribute("courses", teacherCourses);
+			request.setAttribute("assessments", teacherAssessments);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/assessment.jsp");
 			dispatcher.forward(request, response);
-		}catch(NullPointerException | ClassCastException | IllegalArgumentException e) {
-			response.sendRedirect("/WEB-INF/views/pages/panel.jsp");
+		}catch(NullPointerException | ClassCastException | IllegalArgumentException | NoSuchElementException e) {
+			response.sendRedirect("panel");
 		}
 	}
 

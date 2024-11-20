@@ -2,6 +2,19 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 
 <h1>Gestion des notes et évaluations</h1>
+<h3>Mes évaluations</h3>
+	<ul id="grade-assessment-section">
+		<c:forEach var="assessment" items="${assessments}">
+			<li>
+				<form action="${pageContext.request.contextPath}/grade" method="get">
+					<label>${assessment.name}</label>
+					<input type="hidden" name="assessmentId" value='${assessment.id}'>
+					<button type="submit">Noter</button>
+				</form>
+			</li>
+		</c:forEach>
+	</ul>
+<hr>
 <h3>Ajouter une évaluation</h3>
 <form action="${pageContext.request.contextPath}/assessment" method="post">
 	<div class="form-group">

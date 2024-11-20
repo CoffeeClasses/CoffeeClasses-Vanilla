@@ -28,7 +28,7 @@ public class Course {
 	private Teacher teacher;
 
 	// Any assessments in this course ?
-	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Assessment> assessments = new HashSet<>();
 
 	/*
