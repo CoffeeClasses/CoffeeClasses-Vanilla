@@ -57,6 +57,13 @@
 		</div>
 	</header>
 
+	<!-- Display error message if it exists -->
+	<c:if test="${not empty errorMessage}">
+		<div class="error-message">
+				${errorMessage}
+		</div>
+	</c:if>
+
 	<main>
 		<%
 			String contentPage = request.getParameter("contentPage");

@@ -45,4 +45,16 @@ public class Student extends User {
 	public void removeEnrollment(Enrollment enrollment) {
 		enrollments.remove(enrollment);
 	}
+
+	/*
+		Additional
+	 */
+	public boolean hasCourse(Course course) {
+		for (Enrollment enrollment : enrollments) {
+			if (enrollment.getCourse().equals(course)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

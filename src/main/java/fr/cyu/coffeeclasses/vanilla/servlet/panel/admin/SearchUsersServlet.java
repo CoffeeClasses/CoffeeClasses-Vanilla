@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.Optional;
 
-@WebServlet(name = "SearchUsersServlet", urlPatterns = "/panel/admin/users")
+@WebServlet("/panel/admin/users")
 public class SearchUsersServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,15 +23,12 @@ public class SearchUsersServlet extends HttpServlet {
 		Optional<String> search = Optional.ofNullable(request.getParameter("search"));
 
 		// Get role
-		Optional<Class<? extends User>> role = Optional.empty();
-		if (roleString.isPresent()) {
-			role = switch (roleString.get().toLowerCase()) {
-				case "student" -> Optional.of(Student.class);
-				case "teacher" -> Optional.of(Teacher.class);
-				case "administrator" -> Optional.of(Administrator.class);
-				default -> Optional.empty();
-			};
-		}
+		Optional<Class<? extends User>> role = roleString.flatMap(r -> switch (r.toLowerCase()) {
+			case "student" -> Optional.of(Student.class);
+			case "teacher" -> Optional.of(Teacher.class);
+			case "administrator" -> Optional.of(Administrator.class);
+			default -> Optional.empty();
+		});
 
 		// Search
 		Set<User> users = UserDAO.getInstance().searchUsers(role, search);
