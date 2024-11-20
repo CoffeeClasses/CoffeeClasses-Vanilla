@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="search-users">
-	<h1>Chercher un utilisateur</h1>
+	<h1>Rechercher un utilisateur</h1>
 	<form action="${pageContext.request.contextPath}/panel/admin/users" method="get">
 		<div>
 			<label for="role">Rôle :</label>
 			<select name="role" id="role">
-				<option value="">-- Tous --</option>
+				<option value="">Tous</option>
 				<option value="student">Étudiants</option>
 				<option value="teacher">Professeurs</option>
 				<option value="administrator">Administrateurs</option>
@@ -30,14 +30,14 @@
 	<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.user.Administrator" %>
 	<%
 		if (!users.isEmpty()) { %>
-			<h2>Results</h2>
+			<h2>Résultats</h2>
 			<table>
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Role</th>
+						<th>Nom</th>
+						<th>E-mail</th>
+						<th>Rôle</th>
 					</tr>
 				</thead>
 				<tbody>
