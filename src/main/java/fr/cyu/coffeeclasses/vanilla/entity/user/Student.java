@@ -57,4 +57,24 @@ public class Student extends User {
 		}
 		return false;
 	}
+
+	public void setCourses(Set<Course> courses) {
+		if (courses == null) throw new IllegalArgumentException("Courses set cannot be null");
+
+		// Create a set of current courses the student is enrolled in
+		Set<Course> currentCourses = new HashSet<>();
+		for (Enrollment enrollment : enrollments) {
+			currentCourses.add(enrollment.getCourse());
+		}
+
+		// Add enrollments for courses that are in the new set but not already enrolled
+		for (Course course : courses) {
+			if (!currentCourses.contains(course)) {
+				addEnrollment(course);
+			}
+		}
+
+		// Remove enrollments for courses that are no longer in the new set
+		enrollments.removeIf(enrollment -> !courses.contains(enrollment.getCourse()));
+	}
 }

@@ -1,7 +1,6 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
-import fr.cyu.coffeeclasses.vanilla.database.exception.DataNonsenseException;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import java.util.Optional;
@@ -36,5 +35,26 @@ public class UserService {
 
 	public void unregister(User user) {
 		userDAO.delete(user);
+	}
+
+	public Optional<User> find(int ID) {
+		return userDAO.find(ID);
+	}
+
+	public Optional<User> findUserFromIDParameter(Optional<String> userIDString) {
+		if (userIDString.isEmpty()) return Optional.empty();
+
+		int userId;
+		try {
+			userId = Integer.parseInt(userIDString.get());
+		} catch (NumberFormatException e) {
+			return Optional.empty();
+		}
+
+		return this.find(userId);
+	}
+
+	public void update(User user) {
+		userDAO.update(user);
 	}
 }

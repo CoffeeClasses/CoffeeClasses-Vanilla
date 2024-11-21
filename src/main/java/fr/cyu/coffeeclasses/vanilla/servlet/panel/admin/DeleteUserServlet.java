@@ -16,61 +16,27 @@ import java.util.Optional;
 
 @WebServlet("/panel/admin/users/delete")
 public class DeleteUserServlet extends HttpServlet {
+	UserService userService = UserService.getInstance();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Optional<String> userIdString = Optional.ofNullable(request.getParameter("id"));
-		if (userIdString.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
+		Optional<User> target = userService.findUserFromIDParameter(Optional.ofNullable(request.getParameter("id")));
+		if (target.isPresent()) {
+			request.setAttribute("target", target.get());
+			request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-remove.jsp").forward(request, response);
+		} else {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Utilisateur spécifié absent ou invalide.");
 		}
-
-		int userId;
-		try {
-			userId = Integer.parseInt(userIdString.get());
-		} catch (NumberFormatException e) {
-			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
-		}
-
-		Optional<User> userOptional = UserDAO.getInstance().findById(userId);
-		if (userOptional.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
-		}
-		User target = userOptional.get();
-
-		// Redirect to user remove page
-		request.setAttribute("target", target);
-		request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-remove.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Optional<String> userIdString = Optional.ofNullable(request.getParameter("id"));
-		if (userIdString.isEmpty()) {
+		Optional<User> target = userService.findUserFromIDParameter(Optional.ofNullable(request.getParameter("id")));
+		if (target.isPresent()) {
+			userService.unregister(target.get());
 			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
+		} else {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Utilisateur spécifié absent ou invalide.");
 		}
-
-		int userId;
-		try {
-			userId = Integer.parseInt(userIdString.get());
-		} catch (NumberFormatException e) {
-			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
-		}
-
-		Optional<User> userOptional = UserDAO.getInstance().findById(userId);
-		if (userOptional.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/panel/admin/users");
-			return;
-		}
-		User target = userOptional.get();
-
-		// Delete
-		UserService.getInstance().unregister(target);
-
-		// Redirect to user panel
-		response.sendRedirect(request.getContextPath() + "/panel/admin/users");
 	}
 }

@@ -1,8 +1,8 @@
 package fr.cyu.coffeeclasses.vanilla.filter;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 import fr.cyu.coffeeclasses.vanilla.database.exception.DataNonsenseException;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
+import fr.cyu.coffeeclasses.vanilla.service.UserService;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -35,7 +35,7 @@ public class UserFilter implements Filter {
 		}
 
 		// Transfer user to request attributes for convenience
-		User user = UserDAO.getInstance().findById((Integer) session.getAttribute("userId")).orElseThrow(() -> new DataNonsenseException("User not found while requesting for info."));
+		User user = UserService.getInstance().find((Integer) session.getAttribute("userId")).orElseThrow(() -> new DataNonsenseException("User not found while requesting for info."));
 		request.setAttribute("user", user);
 
 		// Continue the filter chain

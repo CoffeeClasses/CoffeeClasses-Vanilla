@@ -57,7 +57,8 @@ public abstract class User {
 	public String getFirstName() {
 		return firstName;
 	}
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) throws IllegalArgumentException {
+		if (firstName == null || firstName.isEmpty()) throw new IllegalArgumentException("First name cannot be empty");
 		this.firstName = firstName;
 	}
 
@@ -66,14 +67,22 @@ public abstract class User {
 		return lastName;
 	}
 	public void setLastName(String lastName) {
+		if (lastName == null || lastName.isEmpty()) throw new IllegalArgumentException("Last name cannot be empty");
 		this.lastName = lastName;
 	}
 
 	// Email
+	private static final String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
+		if (email == null || email.isEmpty()) throw new IllegalArgumentException("Email cannot be empty");
+		// Also check formatting
+		if (!email.matches(emailRegex)) {
+			throw new IllegalArgumentException("Invalid email format");
+		}
 		this.email = email;
 	}
 
@@ -93,6 +102,7 @@ public abstract class User {
 		}
 	}
 	public void setPassword(String password) {
+		if (password == null || password.isEmpty()) throw new IllegalArgumentException("Password cannot be empty");
 		this.password = Password.hash(password).addRandomSalt().withArgon2().getResult();
 	}
 
@@ -101,6 +111,7 @@ public abstract class User {
 		return birthDate;
 	}
 	public void setBirthDate(LocalDate birthDate) {
+		if (birthDate == null) throw new IllegalArgumentException("Birth date cannot be null");
 		this.birthDate = birthDate;
 	}
 }
