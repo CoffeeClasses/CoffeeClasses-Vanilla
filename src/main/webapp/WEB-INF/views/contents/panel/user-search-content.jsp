@@ -63,6 +63,7 @@
 							</td>
 							<!-- Lien -->
 							<td>
+								<a href="${pageContext.request.contextPath}/panel/users/show?id=<%= user.getId() %>">Afficher</a>
 								<a href="${pageContext.request.contextPath}/panel/admin/users/edit?id=<%= user.getId() %>">Modifier</a>
 							</td>
 						</tr>

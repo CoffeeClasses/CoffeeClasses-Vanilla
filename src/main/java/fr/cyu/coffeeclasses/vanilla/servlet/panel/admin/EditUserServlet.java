@@ -25,8 +25,8 @@ import java.util.Optional;
 
 @WebServlet("/panel/admin/users/edit")
 public class EditUserServlet extends HttpServlet {
-	UserService userService = UserService.getInstance();
-	CourseService courseService = CourseService.getInstance();
+	private final UserService userService = UserService.getInstance();
+	private final CourseService courseService = CourseService.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

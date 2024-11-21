@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @WebServlet("/panel/admin/users/delete")
 public class DeleteUserServlet extends HttpServlet {
-	UserService userService = UserService.getInstance();
+	private final UserService userService = UserService.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

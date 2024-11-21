@@ -21,7 +21,6 @@ public class AddUserServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Rediriger vers la page de création d'utilisateur
 		request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-add.jsp").forward(request, response);
 	}
 
