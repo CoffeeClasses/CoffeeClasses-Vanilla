@@ -35,6 +35,7 @@
 .search-users input[type="text"],
 .search-users input[type="email"],
 .search-users input[type="password"],
+.search-users input[type="date"],
 .search-users input[type="checkbox"] {
     padding: 10px;
     font-size: 1em;

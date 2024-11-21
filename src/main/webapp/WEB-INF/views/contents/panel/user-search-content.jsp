@@ -3,6 +3,7 @@
 
 <div class="search-users">
 	<h1>Rechercher un utilisateur</h1>
+
 	<form action="${pageContext.request.contextPath}/panel/admin/users" method="get">
 		<div>
 			<label for="role">Rôle :</label>
@@ -21,6 +22,12 @@
 			<button type="submit">Rechercher</button>
 		</div>
 	</form>
+
+	<div>
+		<a href="${pageContext.request.contextPath}/panel/admin/users/add">
+			<button type="button">Ajouter un utilisateur</button>
+		</a>
+	</div>
 
 	<jsp:useBean id="users" scope="request" type="java.util.Set<fr.cyu.coffeeclasses.vanilla.entity.user.User>"/>
 	<%@ page import="fr.cyu.coffeeclasses.vanilla.entity.user.User" %>

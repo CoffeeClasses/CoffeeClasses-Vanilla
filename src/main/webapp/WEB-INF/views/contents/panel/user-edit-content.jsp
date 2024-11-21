@@ -18,6 +18,9 @@
 		<label for="lastName">Nom :</label>
 		<input type="text" id="lastName" name="lastName" value="${target.lastName}" required /><br/>
 
+		<label for="birthDate">Date de naissance :</label>
+		<input type="date" id="birthDate" name="birthDate" value="${target.birthDate}" required /><br/>
+
 		<label for="email">Mail :</label>
 		<input type="email" id="email" name="email" value="${target.email}" required /><br/>
 

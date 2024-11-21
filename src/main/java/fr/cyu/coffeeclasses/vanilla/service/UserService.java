@@ -57,4 +57,8 @@ public class UserService {
 	public void update(User user) {
 		userDAO.update(user);
 	}
+
+	public void save(User newUser) {
+		userDAO.save(newUser);
+	}
 }

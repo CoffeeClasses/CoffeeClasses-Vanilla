@@ -1,22 +1,22 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.CourseDAO;
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
+
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
-import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import fr.cyu.coffeeclasses.vanilla.service.CourseService;
 import fr.cyu.coffeeclasses.vanilla.service.UserService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -53,6 +53,7 @@ public class EditUserServlet extends HttpServlet {
 
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
+			String birthDateString = request.getParameter("birthDate");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String[] courseIds = request.getParameterValues("courses");
@@ -61,6 +62,7 @@ public class EditUserServlet extends HttpServlet {
 			if (
 				firstName == null || firstName.isEmpty() ||
 				lastName == null || lastName.isEmpty() ||
+				birthDateString == null || birthDateString.isEmpty() ||
 				email == null || email.isEmpty()
 			) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Données entrées invalides.");
@@ -70,6 +72,12 @@ public class EditUserServlet extends HttpServlet {
 			// Modify
 			target.setFirstName(firstName);
 			target.setLastName(lastName);
+			try {
+				target.setBirthDate(LocalDate.parse(birthDateString));
+			} catch (DateTimeParseException e) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Format de date invalide. Utilisez AAAA-MM-JJ.");
+				return;
+			}
 			try {
 				target.setEmail(email);
 			} catch (IllegalArgumentException e) {
