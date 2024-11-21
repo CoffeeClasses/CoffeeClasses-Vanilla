@@ -1,6 +1,10 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.CourseDAO;
+import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
+
+import java.util.Optional;
+import java.util.Set;
 
 public class CourseService {
 	// Singleton
@@ -15,4 +19,11 @@ public class CourseService {
 	/* 
 	 * Methods
 	 */
+	public Set<Course> getAll() {
+		return courseDAO.getAll();
+	}
+
+	public Optional<Course> find(int id) {
+		return courseDAO.find(id);
+	}
 }

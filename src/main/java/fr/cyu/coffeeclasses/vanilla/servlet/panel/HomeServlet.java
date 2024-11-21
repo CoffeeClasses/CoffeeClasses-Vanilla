@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet("/panel/home")
 public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pages/home.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/pages/panel/home.jsp").forward(request, response);
 	}
 }

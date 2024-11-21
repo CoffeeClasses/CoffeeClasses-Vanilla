@@ -13,8 +13,9 @@ import jakarta.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class GenericDAO<T> {
 	private static final Logger logger = LoggerFactory.getLogger(GenericDAO.class);
@@ -42,11 +43,11 @@ public abstract class GenericDAO<T> {
 		}
 	}
 
-	public Optional<T> findById(int id) throws DataAccessException {
+	public Optional<T> find(int ID) throws DataAccessException {
 		try (Session session = sessionFactory.openSession()) {
-			return Optional.ofNullable(session.get(entityClass, id));
+			return Optional.ofNullable(session.get(entityClass, ID));
 		} catch (Exception e) {
-			logger.error("Error while finding entity by ID: {}", id, e);
+			logger.error("Error while finding entity by ID: {}", ID, e);
 			throw new DataAccessException("Error while finding entity by ID", e);
 		}
 	}
@@ -80,26 +81,16 @@ public abstract class GenericDAO<T> {
 	/*
 	 * Additional operations
 	 */
-	public List<T> getAll() throws DataAccessException {
+	public Set<T> getAll() throws DataAccessException {
 		try (Session session = sessionFactory.openSession()) {
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<T> query = builder.createQuery(entityClass);
 			Root<T> root = query.from(entityClass);
 			query.select(root);
-			return session.createQuery(query).getResultList();
+			return new HashSet<>(session.createQuery(query).getResultList());
 		} catch (Exception e) {
 			logger.error("Error while retrieving all entities", e);
 			throw new DataAccessException("Error while retrieving all entities", e);
-		}
-	}
-
-	public void deleteById(int id) throws DataAccessException, DataUpdateException {
-		Optional<T> entity = findById(id);
-		if (entity.isPresent()) {
-			delete(entity.get());
-		} else {
-			logger.error("Could not find entity to delete by ID : {}", id);
-			throw new DataAccessException("Could not locate entity to delete by ID : " + id);
 		}
 	}
 }

@@ -5,7 +5,6 @@
 <jsp:useBean id="user" scope="request" type="fr.cyu.coffeeclasses.vanilla.entity.user.User"/>
 <%
 	request.setAttribute("userType", user.getClass().getSimpleName());
-	request.setAttribute("username", user.getFirstName() + " " + user.getLastName());
 %>
 
 <!DOCTYPE html>
@@ -45,24 +44,31 @@
 				<c:otherwise>
 				</c:otherwise>
 			</c:choose>
-			<a href="${pageContext.request.contextPath}/panel/profile">Profil</a>
+			<a href="${pageContext.request.contextPath}/panel/users/show?id=<%= user.getId() %>">Profil</a>
 		</div>
 
 		<!-- Nom d'utilisateur et déconnexion -->
 		<div class="user-actions">
-			<span class="username">${username}</span>
+			<span class="username">${user.firstName} ${user.lastName}</span>
 			<form action="${pageContext.request.contextPath}/logout" method="post" class="logout-form">
 				<button type="submit" class="logout-button">Déconnexion</button>
 			</form>
 		</div>
 	</header>
 
+	<!-- Display error message if it exists -->
+	<c:if test="${not empty errorMessage}">
+		<div class="error-message">
+				${errorMessage}
+		</div>
+	</c:if>
+
 	<main>
 		<%
 			String contentPage = request.getParameter("contentPage");
 			if (contentPage != null) {
 				out.flush();
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/" + contentPage + "-content.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/contents/panel/" + contentPage + "-content.jsp");
 				dispatcher.include(request, response);
 			} else {
 				throw new InvalidParameterException("Panel layout requested with no content.");
