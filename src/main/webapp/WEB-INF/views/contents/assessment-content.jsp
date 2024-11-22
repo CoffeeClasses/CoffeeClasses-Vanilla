@@ -9,7 +9,7 @@
 				<form action="${pageContext.request.contextPath}/grade" method="get">
 					<label>${assessment.name}</label>
 					<input type="hidden" name="assessmentId" value='${assessment.id}'>
-					<button type="submit">Noter</button>
+					<button type="submit">Noter/modifier les notes</button>
 				</form>
 			</li>
 		</c:forEach>

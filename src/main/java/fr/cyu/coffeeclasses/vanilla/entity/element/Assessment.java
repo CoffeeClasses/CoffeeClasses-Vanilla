@@ -30,7 +30,7 @@ public class Assessment {
 	private LocalDateTime date;
 
 	// What are its grades ?
-	@OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Grade> grades = new HashSet<>();
 
 	// What's the maximum value a grade can have on this assignment ?

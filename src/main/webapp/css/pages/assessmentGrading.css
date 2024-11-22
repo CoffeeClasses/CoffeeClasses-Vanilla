@@ -1,0 +1,45 @@
+#gradingTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+#gradingTable th, #gradingTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#gradingTable th {
+    background-color: #ff8040;
+    color: #ffffff;
+    text-align: center;
+}
+
+#gradingTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#gradingTable tr:hover {
+    background-color: #fdf9f1;
+}
+
+#gradingTable td {
+    text-align: center;
+}
+
+#gradingButton {
+    display: block;
+    padding: 10px 20px;
+    background-color: #ff8040;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#gradingButton:hover {
+    background-color: #bd5f2f;
+}
