@@ -3,8 +3,8 @@
 
 <jsp:useBean id="teachers" scope="request" type="java.util.Set<fr.cyu.coffeeclasses.vanilla.entity.user.Teacher>"/>
 
-<div class="form-container">
-	<h2>Ajouter un nouveau cours</h2>
+<div class="add-course">
+	<h1>Ajouter un nouveau cours</h1>
 	<form action="${pageContext.request.contextPath}/panel/admin/courses/add" method="post">
 		<div class="form-group">
 			<label for="name">Nom du cours :</label>
@@ -20,6 +20,6 @@
 			</select>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Ajouter un cours</button>
+		<button type="submit">Ajouter un cours</button>
 	</form>
 </div>
