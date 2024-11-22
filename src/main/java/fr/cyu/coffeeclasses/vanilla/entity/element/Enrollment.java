@@ -26,7 +26,7 @@ public class Enrollment {
 	private Course course;
 
 	// Grades for this enrollment
-	@OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Grade> grades;
 
 	/*

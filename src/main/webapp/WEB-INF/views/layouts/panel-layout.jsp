@@ -38,8 +38,7 @@
 					<a href="${pageContext.request.contextPath}/panel/teacher/grades">Mes évaluations</a>
 				</c:when>
 				<c:when test="${userType == 'Student'}">
-					<a href="${pageContext.request.contextPath}/panel/student/courses">Mes cours</a>
-					<a href="${pageContext.request.contextPath}/panel/student/grades">Mes résultats</a>
+					<a href="${pageContext.request.contextPath}/panel/student/details">Mes cours et résultats</a>
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
