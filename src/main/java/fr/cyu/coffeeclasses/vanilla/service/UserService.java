@@ -4,6 +4,7 @@ import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import java.util.Optional;
+import java.util.Set;
 
 public class UserService {
 	// Singleton
@@ -41,7 +42,7 @@ public class UserService {
 		return userDAO.find(ID);
 	}
 
-	public Optional<User> findUserFromIDParameter(Optional<String> userIDString) {
+	public Optional<User> findFromIDParameter(Optional<String> userIDString) {
 		if (userIDString.isEmpty()) return Optional.empty();
 
 		int userId;
@@ -60,5 +61,9 @@ public class UserService {
 
 	public void save(User newUser) {
 		userDAO.save(newUser);
+	}
+
+	public Set<User> searchUsers(Optional<Class<? extends User>> role, Optional<String> search) {
+		return userDAO.searchUsers(role, search);
 	}
 }

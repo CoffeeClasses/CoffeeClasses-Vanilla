@@ -20,14 +20,8 @@ public class Teacher extends User {
 		Methods
 	 */
 	protected Teacher() {}
-	protected Teacher(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+	public Teacher(String firstName, String lastName, String email, String password, LocalDate birthDate) {
 		super(firstName, lastName, email, password, birthDate);
-	}
-
-	//
-	//
-	public static Teacher create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
-		return new Teacher(firstName, lastName, email, password, birthDate);
 	}
 
 	// Courses

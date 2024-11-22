@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <form action="${pageContext.request.contextPath}/login" method="post">
 	<h2>Connexion au serveur</h2>
 

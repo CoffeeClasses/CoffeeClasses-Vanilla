@@ -23,13 +23,8 @@ public class Student extends User {
 		Methods
 	 */
 	protected Student() {}
-	protected Student(String firstName, String lastName, String email, String password, LocalDate birthDate) {
+	public Student(String firstName, String lastName, String email, String password, LocalDate birthDate) {
 		super(firstName, lastName, email, password, birthDate);
-	}
-
-	//
-	public static Student create(String firstName, String lastName, String email, String password, LocalDate birthDate) {
-		return new Student(firstName, lastName, email, password, birthDate);
 	}
 
 	// Enrollments

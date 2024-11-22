@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -67,11 +68,28 @@ public class Course {
 	public Set<Assessment> getAssessments() {
 		return assessments;
 	}
+	public void setAssessments(Set<Assessment> assessments) {
+		this.assessments = assessments;
+	}
 	public void addAssessment(String name, LocalDateTime date, int maximum) {
 		Assessment assessment = new Assessment(name, date, maximum, this);
 		assessments.add(assessment);
 	}
 	public void removeAssessment(Assessment assessment) {
 		assessments.remove(assessment);
+	}
+
+	/* Workaround for a bug */
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		Course course = (Course) obj;
+		return id == course.id;
 	}
 }
