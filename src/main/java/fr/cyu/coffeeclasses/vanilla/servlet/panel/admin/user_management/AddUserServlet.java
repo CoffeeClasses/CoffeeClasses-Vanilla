@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin;
+package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.user_management;
 
 import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
@@ -17,11 +17,14 @@ import java.time.format.DateTimeParseException;
 
 @WebServlet("/panel/admin/users/add")
 public class AddUserServlet extends HttpServlet {
+	// Services
 	private final UserService userService = UserService.getInstance();
+	// JSP
+	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/admin/user-management/user-add.jsp";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-add.jsp").forward(request, response);
+		request.getRequestDispatcher(JSP_PATH).forward(request, response);
 	}
 
 	@Override
@@ -40,7 +43,8 @@ public class AddUserServlet extends HttpServlet {
 				birthDateString == null || birthDateString.isEmpty() ||
 				email == null || email.isEmpty()
 		) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Données entrées invalides.");
+			request.setAttribute("errorMessage", "Données entrées invalides.");
+			request.getRequestDispatcher(JSP_PATH).forward(request, response);
 			return;
 		}
 
@@ -49,14 +53,15 @@ public class AddUserServlet extends HttpServlet {
 		try {
 			birthDate = LocalDate.parse(birthDateString);
 		} catch (DateTimeParseException e) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Format de date invalide. Utilisez AAAA-MM-JJ.");
+			request.setAttribute("errorMessage", "Format de date invalide. Utilisez AAAA-MM-JJ.");
+			request.getRequestDispatcher(JSP_PATH).forward(request, response);
 			return;
 		}
 
 		User newUser;
 		switch (role) {
 			case "student":
-				newUser = Student.create(
+				newUser = new Student(
 						firstName,
 						lastName,
 						email,
@@ -65,7 +70,7 @@ public class AddUserServlet extends HttpServlet {
 				);
 				break;
 			case "teacher":
-				newUser = Teacher.create(
+				newUser = new Teacher(
 						firstName,
 						lastName,
 						email,
@@ -74,7 +79,7 @@ public class AddUserServlet extends HttpServlet {
 				);
 				break;
 			case "administrator":
-				newUser = Administrator.create(
+				newUser = new Administrator(
 						firstName,
 						lastName,
 						email,
@@ -83,7 +88,8 @@ public class AddUserServlet extends HttpServlet {
 				);
 				break;
 			default:
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Rôle invalide.");
+				request.setAttribute("errorMessage", "Rôle invalide.");
+				request.getRequestDispatcher(JSP_PATH).forward(request, response);
 				return;
 		}
 

@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin;
+package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.user_management;
 
 
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
@@ -25,12 +25,15 @@ import java.util.Optional;
 
 @WebServlet("/panel/admin/users/edit")
 public class EditUserServlet extends HttpServlet {
+	// Services
 	private final UserService userService = UserService.getInstance();
 	private final CourseService courseService = CourseService.getInstance();
+	// JSP
+	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/admin/user-management/user-edit.jsp";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Optional<User> targetUser = userService.findUserFromIDParameter(Optional.ofNullable(request.getParameter("id")));
+		Optional<User> targetUser = userService.findFromIDParameter(Optional.ofNullable(request.getParameter("id")));
 		if (targetUser.isPresent()) {
 			// Get available courses for students and teachers
 			Set<Course> availableCourses = courseService.getAll();
@@ -39,7 +42,7 @@ public class EditUserServlet extends HttpServlet {
 			request.setAttribute("target", targetUser.get());
 			request.setAttribute("availableCourses", availableCourses);
 
-			request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-edit.jsp").forward(request, response);
+			request.getRequestDispatcher(JSP_PATH).forward(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Utilisateur spécifié absent ou invalide.");
 		}
@@ -47,7 +50,7 @@ public class EditUserServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Optional<User> targetOpt = userService.findUserFromIDParameter(Optional.ofNullable(request.getParameter("id")));
+		Optional<User> targetOpt = userService.findFromIDParameter(Optional.ofNullable(request.getParameter("id")));
 		if (targetOpt.isPresent()) {
 			User target = targetOpt.get();
 

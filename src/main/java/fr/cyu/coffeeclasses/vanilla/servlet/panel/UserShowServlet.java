@@ -16,11 +16,12 @@ import java.util.Set;
 
 @WebServlet("/panel/users/show")
 public class UserShowServlet extends HttpServlet {
+	// Services
 	private final UserService userService = UserService.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Optional<User> targetOpt = userService.findUserFromIDParameter(Optional.ofNullable(request.getParameter("id")));
+		Optional<User> targetOpt = userService.findFromIDParameter(Optional.ofNullable(request.getParameter("id")));
 		if (targetOpt.isPresent()) {
 			request.setAttribute("target", targetOpt.get());
 			request.getRequestDispatcher("/WEB-INF/views/pages/panel/user-show.jsp").forward(request, response);

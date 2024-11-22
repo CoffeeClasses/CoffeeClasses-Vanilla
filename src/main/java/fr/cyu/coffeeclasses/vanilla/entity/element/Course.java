@@ -67,6 +67,9 @@ public class Course {
 	public Set<Assessment> getAssessments() {
 		return assessments;
 	}
+	public void setAssessments(Set<Assessment> assessments) {
+		this.assessments = assessments;
+	}
 	public void addAssessment(String name, LocalDateTime date, int maximum) {
 		Assessment assessment = new Assessment(name, date, maximum, this);
 		assessments.add(assessment);

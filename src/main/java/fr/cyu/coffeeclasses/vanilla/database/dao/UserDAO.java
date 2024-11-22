@@ -19,7 +19,6 @@ import java.util.*;
 
 public class UserDAO extends GenericDAO<User> {
 	private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
-	private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	// Singleton
 	private static final UserDAO INSTANCE = new UserDAO();

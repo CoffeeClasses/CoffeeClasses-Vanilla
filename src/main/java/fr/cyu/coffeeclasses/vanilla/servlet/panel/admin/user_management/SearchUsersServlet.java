@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin;
+package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.user_management;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
@@ -6,6 +6,7 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
+import fr.cyu.coffeeclasses.vanilla.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +18,11 @@ import java.util.Optional;
 
 @WebServlet("/panel/admin/users")
 public class SearchUsersServlet extends HttpServlet {
+	// Services
+	private final UserService userService = UserService.getInstance();
+	// JSP
+	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/admin/user-management/user-search.jsp";
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Optional<String> roleString = Optional.ofNullable(request.getParameter("role"));
@@ -31,9 +37,9 @@ public class SearchUsersServlet extends HttpServlet {
 		});
 
 		// Search
-		Set<User> users = UserDAO.getInstance().searchUsers(role, search);
+		Set<User> users = userService.searchUsers(role, search);
 
 		request.setAttribute("users", users);
-		request.getRequestDispatcher("/WEB-INF/views/pages/panel/admin/user-search.jsp").forward(request, response);
+		request.getRequestDispatcher(JSP_PATH).forward(request, response);
 	}
 }
