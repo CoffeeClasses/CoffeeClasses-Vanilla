@@ -38,7 +38,7 @@ public class UserDAO extends GenericDAO<User> {
 			CriteriaQuery<User> query = builder.createQuery(User.class);
 			Root<User> root = query.from(User.class);
 			query.select(root).where(builder.equal(root.get("email"), email));
-			return Optional.ofNullable(session.createQuery(query).uniqueResult());
+			return session.createQuery(query).uniqueResultOptional();
 		} catch (Exception e) {
 			logger.error("Error while finding user by email: {}", email, e);
 			throw new DataAccessException("Error while finding user by email: " + email, e);

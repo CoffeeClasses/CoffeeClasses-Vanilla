@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import com.password4j.Password;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -113,5 +113,19 @@ public abstract class User {
 	public void setBirthDate(LocalDate birthDate) {
 		if (birthDate == null) throw new IllegalArgumentException("Birth date cannot be null");
 		this.birthDate = birthDate;
+	}
+
+	/* Overrides */
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		User user = (User) obj;
+		return id.equals(user.id);
 	}
 }

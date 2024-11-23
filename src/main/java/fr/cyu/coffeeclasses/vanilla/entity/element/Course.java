@@ -1,10 +1,11 @@
 package fr.cyu.coffeeclasses.vanilla.entity.element;
 
+import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,6 +31,10 @@ public class Course {
 	// Any assessments in this course ?
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Assessment> assessments = new HashSet<>();
+
+	// Enrollments for this course
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Set<Enrollment> enrollments = new HashSet<>();
 
 	/*
 		Methods
@@ -71,12 +76,36 @@ public class Course {
 	public void setAssessments(Set<Assessment> assessments) {
 		this.assessments = assessments;
 	}
-	public void addAssessment(String name, LocalDateTime date, int maximum) {
+	public void addAssessment(String name, LocalDate date, int maximum) {
 		Assessment assessment = new Assessment(name, date, maximum, this);
 		assessments.add(assessment);
 	}
 	public void removeAssessment(Assessment assessment) {
 		assessments.remove(assessment);
+	}
+
+	// Enrollments
+	public Set<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+	public void addStudent(Student student) {
+		enrollments.add(new Enrollment(student, this));
+	}
+	public void removeEnrollment(Enrollment enrollment) {
+		enrollments.remove(enrollment);
+		enrollment.setCourse(null);
+	}
+
+	/* Bonus */
+	public Set<Student> getStudents() {
+		Set<Student> students = new HashSet<>();
+		for (Enrollment enrollment : enrollments) {
+			students.add(enrollment.getStudent());
+		}
+		return students;
+	}
+	public Optional<Enrollment> getEnrollmentForStudent(Student student) {
+		return enrollments.stream().filter(enrollment -> enrollment.getStudent().equals(student)).findFirst();
 	}
 
 	/* Workaround for a bug */
@@ -90,6 +119,6 @@ public class Course {
 		if (this == obj) return true;
 		if (obj == null || getClass() != obj.getClass()) return false;
 		Course course = (Course) obj;
-		return id == course.id;
+		return id.equals(course.id);
 	}
 }

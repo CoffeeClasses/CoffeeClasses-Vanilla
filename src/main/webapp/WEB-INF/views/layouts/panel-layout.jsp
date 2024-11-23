@@ -56,9 +56,16 @@
 	</header>
 
 	<!-- Display error message if it exists -->
+	<jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
 	<c:if test="${not empty errorMessage}">
 		<div class="error-message">
 				${errorMessage}
+		</div>
+	</c:if>
+	<!-- Display success message if it exists -->
+	<c:if test="${not empty successMessage}">
+		<div class="success-message">
+				${successMessage}
 		</div>
 	</c:if>
 

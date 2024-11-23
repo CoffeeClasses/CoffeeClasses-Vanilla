@@ -2,8 +2,10 @@ package fr.cyu.coffeeclasses.vanilla.entity.element;
 
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 
+import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,7 +29,7 @@ public class Assessment {
 
 	// When did the assessment occur ?
 	@Column(nullable = false)
-	private LocalDateTime date;
+	private LocalDate date;
 
 	// What are its grades ?
 	@OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -41,7 +43,7 @@ public class Assessment {
 		Methods
 	 */
 	protected Assessment() {}
-	public Assessment(String name, LocalDateTime date, int maximum, Course course) {
+	public Assessment(String name, LocalDate date, int maximum, Course course) {
 		setName(name);
 		setDate(date);
 		setMaximum(maximum);
@@ -73,10 +75,10 @@ public class Assessment {
 	}
 
 	// Date
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -97,5 +99,18 @@ public class Assessment {
 	}
 	public void setMaximum(int maximum) {
 		this.maximum = maximum;
+	}
+
+	/*
+		Bonus
+	 */
+	public Teacher getTeacher() {
+		return course.getTeacher();
+	}
+	public Set<Student> getStudents() {
+		return course.getStudents();
+	}
+	public Optional<Grade> getGradeForStudent(Student student) {
+		return grades.stream().filter(grade -> grade.getStudent().equals(student)).findFirst();
 	}
 }

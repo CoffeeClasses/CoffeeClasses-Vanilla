@@ -91,4 +91,11 @@ public class Grade {
 	private void setDate(LocalDateTime date) {
 		this.date = date;
 	}
+
+	/*
+		Bonus
+	 */
+	public Student getStudent() {
+		return enrollment.getStudent();
+	}
 }

@@ -1,4 +1,4 @@
-package fr.cyu.coffeeclasses.vanilla.servlet.action;
+package fr.cyu.coffeeclasses.vanilla.servlet.panel;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

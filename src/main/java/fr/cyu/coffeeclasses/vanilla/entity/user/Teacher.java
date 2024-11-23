@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import fr.cyu.coffeeclasses.vanilla.entity.element.Assessment;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -35,5 +36,14 @@ public class Teacher extends User {
 	}
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
+	}
+
+	// Assessments
+	public Set<Assessment> getAssessments() {
+		Set<Assessment> assessments = new HashSet<>();
+		for (Course course : courses) {
+			assessments.addAll(course.getAssessments());
+		}
+		return assessments;
 	}
 }

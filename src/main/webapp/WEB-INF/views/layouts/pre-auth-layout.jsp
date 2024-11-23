@@ -21,6 +21,7 @@
 		</div>
 
 		<!-- Display error message if it exists -->
+		<jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
 		<c:if test="${not empty errorMessage}">
 			<div class="error-message">
 					${errorMessage}
