@@ -34,8 +34,7 @@
 					<a href="${pageContext.request.contextPath}/panel/admin/courses">Cours</a>
 				</c:when>
 				<c:when test="${userType == 'Teacher'}">
-					<a href="${pageContext.request.contextPath}/panel/teacher/courses">Mes cours</a>
-					<a href="${pageContext.request.contextPath}/panel/teacher/grades">Mes évaluations</a>
+					<a href="${pageContext.request.contextPath}/panel/teacher/assessments">Mes évaluations</a>
 				</c:when>
 				<c:when test="${userType == 'Student'}">
 					<a href="${pageContext.request.contextPath}/panel/student/details">Mes cours et résultats</a>
@@ -49,9 +48,9 @@
 		<!-- Nom d'utilisateur et déconnexion -->
 		<div class="user-actions">
 			<span class="username">${user.firstName} ${user.lastName}</span>
-			<form action="${pageContext.request.contextPath}/logout" method="post" class="logout-form">
+			<a href="${pageContext.request.contextPath}/logout" class="logout-form">
 				<button type="submit" class="logout-button">Déconnexion</button>
-			</form>
+			</a>
 		</div>
 	</header>
 
@@ -59,6 +58,12 @@
 	<c:if test="${not empty errorMessage}">
 		<div class="error-message">
 				${errorMessage}
+		</div>
+	</c:if>
+	<!-- Display success message if it exists -->
+	<c:if test="${not empty successMessage}">
+		<div class="success-message">
+				${successMessage}
 		</div>
 	</c:if>
 

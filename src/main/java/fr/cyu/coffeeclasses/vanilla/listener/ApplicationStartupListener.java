@@ -27,7 +27,7 @@ public class ApplicationStartupListener implements ServletContextListener {
 					new Administrator(
 							"Default",
 							"Admin",
-							"admin@example.com",
+							"teacher.coffeeclasses@yopmail.com",
 							"admin123",
 							LocalDate.of(2003, 10, 9)
 					)
