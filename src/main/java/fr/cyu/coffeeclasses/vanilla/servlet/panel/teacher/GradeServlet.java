@@ -1,5 +1,6 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.teacher;
 
+import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import fr.cyu.coffeeclasses.vanilla.service.AssessmentService;
 import fr.cyu.coffeeclasses.vanilla.service.GradeService;
@@ -24,13 +25,11 @@ public class GradeServlet extends HttpServlet {
 	private final static StudentService studentService = StudentService.getInstance();
 	private final static GradeService gradeService = GradeService.getInstance();
 	// JSP
-	private final static String JSP_PATH = "/WEB-INF/views/pages/assessment-grading.jsp";
+	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/teacher/assessment-grading.jsp";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			// Find Assessment
-			String strId = request.getParameter("assessmentId");
-			int assessmentId = Integer.parseInt(strId.substring(9, strId.length() - 1).trim());
+			int assessmentId = Integer.parseInt(request.getParameter("assessmentId"));
 			Assessment assessment = assessmentService.find(assessmentId).orElseThrow();
 
 			// Find Teacher
@@ -46,14 +45,10 @@ public class GradeServlet extends HttpServlet {
 			}
 			request.setAttribute("studentGrades", studentGrades);
 			request.getRequestDispatcher(JSP_PATH).forward(request, response);
-		}catch(Exception e) {
-			response.sendRedirect(request.getContextPath() + "/panel/home");
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String strId = request.getParameter("assessmentId");
-		int assessmentId = Integer.parseInt(strId.substring(9, strId.length() - 1).trim());
+		int assessmentId = Integer.parseInt(request.getParameter("assessmentId"));
 
 		Assessment assessment = assessmentService.find(assessmentId).orElseThrow();
 		Set<Student> concerned = assessment.getStudents();
@@ -68,12 +63,17 @@ public class GradeServlet extends HttpServlet {
 	            grade.setValue(newValue);
 				gradeService.update(grade);
 	        } else {
-	            Grade newGrade = new Grade(assessment, assessment.getCourse().getEnrollmentForStudent(s).orElseThrow(), newValue);
-				gradeService.save(newGrade);
+				Optional<Enrollment> enrollmentOpt = assessment.getCourse().getEnrollmentForStudent(s);
+				if (enrollmentOpt.isPresent()) {
+					Enrollment enrollment = enrollmentOpt.get();
+					Grade newGrade = new Grade(assessment, enrollment, newValue);
+					gradeService.save(newGrade);
+				} else {
+					System.err.println("No enrollment found for student: " + s.getId());
+				}
 	        }
 		}
-		request.setAttribute("successMessage", "Les notes ont bien été eregistrées.");
-		new AssignServlet().doGet(request,response);
+		request.setAttribute("successMessage", "Les notes ont bien été enregistrées.");
+		response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");
 	}
-
 }

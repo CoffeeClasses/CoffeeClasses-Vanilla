@@ -24,7 +24,7 @@ public class Assessment {
 	@Column(nullable = false)
 	private String name;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Course course;
 
 	// When did the assessment occur ?

@@ -33,7 +33,7 @@ public class Course {
 	private Set<Assessment> assessments = new HashSet<>();
 
 	// Enrollments for this course
-	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Enrollment> enrollments = new HashSet<>();
 
 	/*

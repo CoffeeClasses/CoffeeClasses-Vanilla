@@ -43,9 +43,7 @@ public class AssignServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			String strId = request.getParameter("selectedCourse");
-			int courseId = Integer.parseInt(strId.substring(9, strId.length() - 1).trim());
+			int courseId = Integer.parseInt(request.getParameter("selectedCourse"));
 			int maxGrade = Integer.parseInt(request.getParameter("maxGrade"));
 			String name = request.getParameter("name");
 			String dateString = request.getParameter("date");
@@ -63,13 +61,9 @@ public class AssignServlet extends HttpServlet {
 			Course course = courseService.find(courseId).orElseThrow();
 			Assessment assessment = new Assessment(name,date,maxGrade,course);
 			assessmentService.save(assessment);
-			
+
 			request.setAttribute("successMessage", "L'évaluation a bien été enregistrée.");
-			this.doGet(request, response);
-		}catch(Exception e) {
-			request.setAttribute("errorMessage", "Une erreur est survenue.");
-			this.doGet(request, response);
-		}
+			response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");
 	}
 
 }

@@ -2,6 +2,7 @@ package fr.cyu.coffeeclasses.vanilla.database.dao;
 
 import java.util.Optional;
 
+import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
@@ -28,10 +29,18 @@ public class GradeDAO extends GenericDAO<Grade> {
 			HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Grade> cr = cb.createQuery(Grade.class);
             Root<Grade> root = cr.from(Grade.class);
-            cr.select(root).where(cb.and(
-                cb.equal(root.get("student"), student),
-                cb.equal(root.get("assessment"), assessment)
-            ));
+
+			// Join with Enrollment to access the Student entity
+			Root<Enrollment> enrollmentRoot = cr.from(Enrollment.class);
+
+			// Define the query criteria
+			cr.select(root).where(
+					cb.and(
+							cb.equal(root.get("assessment"), assessment),
+							cb.equal(root.get("enrollment"), enrollmentRoot),
+							cb.equal(enrollmentRoot.get("student"), student)
+					)
+			);
             
             Query<Grade> query = session.createQuery(cr);
             return query.uniqueResultOptional();
