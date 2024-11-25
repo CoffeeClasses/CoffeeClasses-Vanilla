@@ -1,6 +1,7 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.TeacherDAO;
+
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 
 import java.util.Optional;
