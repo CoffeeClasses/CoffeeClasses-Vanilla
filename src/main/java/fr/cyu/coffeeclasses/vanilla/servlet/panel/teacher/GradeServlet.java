@@ -2,6 +2,7 @@ package fr.cyu.coffeeclasses.vanilla.servlet.panel.teacher;
 
 import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
+import fr.cyu.coffeeclasses.vanilla.mail.MailSender;
 import fr.cyu.coffeeclasses.vanilla.service.AssessmentService;
 import fr.cyu.coffeeclasses.vanilla.service.GradeService;
 import fr.cyu.coffeeclasses.vanilla.service.StudentService;
@@ -54,6 +55,9 @@ public class GradeServlet extends HttpServlet {
 		Set<Student> concerned = assessment.getStudents();
 
 		double newValue;
+		String message;
+		MailSender mailSender = MailSender.getInstance();
+		
 		for(Student s: concerned) {
 			newValue = Double.parseDouble(request.getParameter(String.valueOf(s.getId())));
 			Optional<Grade> existingGrade = gradeService.findByStudentAndAssessment(s, assessment);
@@ -72,6 +76,9 @@ public class GradeServlet extends HttpServlet {
 					System.err.println("No enrollment found for student: " + s.getId());
 				}
 	        }
+	        message = "Votre note pour l'évaluation: "+assessment.getName()+" ("+assessment.getCourse().getName()+") est disponible.\n"
+	        		+ "Accédez à votre plateforme pour la consulter.";
+	        mailSender.sendMail(s, "Note disponible", message);
 		}
 		request.setAttribute("successMessage", "Les notes ont bien été enregistrées.");
 		response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");
