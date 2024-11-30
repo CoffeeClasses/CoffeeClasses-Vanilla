@@ -1,6 +1,5 @@
 package fr.cyu.coffeeclasses.vanilla.service;
 
-import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import jakarta.mail.*;
