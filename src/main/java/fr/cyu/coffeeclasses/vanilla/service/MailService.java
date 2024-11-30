@@ -17,13 +17,6 @@ public class MailService {
 	private final static String fromEmail = "coffeeclasses.service@gmail.com";
 	private final static String password = "zyhd gunf qwjc bfwd";
 	// Singleton
-	private final static MailService instance = new MailService();
-	public static MailService getInstance() {
-		return instance;
-	}
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(MailService.class);
-	
 	private MailService() {
 		// Mail server properties
 		Properties props = new Properties();
@@ -40,6 +33,12 @@ public class MailService {
 			}
 		});
 	}
+	private final static MailService instance = new MailService();
+	public static MailService getInstance() {
+		return instance;
+	}
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(MailService.class);
 	
 	public void sendMail(User dest, String subject, String body) {
 		try {

@@ -1,6 +1,5 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.user_management;
 
-
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
@@ -14,9 +13,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -26,14 +27,17 @@ import java.util.Optional;
 @WebServlet("/panel/admin/users/edit")
 public class EditUserServlet extends HttpServlet {
 	// Services
-	private final UserService userService = UserService.getInstance();
-	private final CourseService courseService = CourseService.getInstance();
-	private final MailService mailService = MailService.getInstance();
+	private final static UserService userService = UserService.getInstance();
+	private final static CourseService courseService = CourseService.getInstance();
 	// JSP
 	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/admin/user-management/user-edit.jsp";
+	// Logger
+	private final static Logger logger = LoggerFactory.getLogger(EditUserServlet.class);
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("User edit attempt.");
+
 		Optional<User> targetUser = userService.findFromIDParameter(Optional.ofNullable(request.getParameter("id")));
 		if (targetUser.isPresent()) {
 			// Get available courses for students and teachers
@@ -122,7 +126,7 @@ public class EditUserServlet extends HttpServlet {
 
 			// Sauvegarde
 			userService.update(target);
-			mailService.sendMail(target, "Données mises à jour", "Bonjour,\nVos informations ont bien été mises à jours par la scolarité.");
+			MailService.getInstance().sendMail(target, "Données mises à jour", "Bonjour,\nVos informations ont bien été mises à jours par la scolarité.");
 
 			// Redirect to the admin panel
 			response.sendRedirect(request.getContextPath() + "/panel/admin/users");

@@ -5,7 +5,6 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import fr.cyu.coffeeclasses.vanilla.service.MailService;
 import fr.cyu.coffeeclasses.vanilla.service.AssessmentService;
 import fr.cyu.coffeeclasses.vanilla.service.GradeService;
-import fr.cyu.coffeeclasses.vanilla.service.StudentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +23,6 @@ public class GradeServlet extends HttpServlet {
 	// Services
 	private final static AssessmentService assessmentService = AssessmentService.getInstance();
 	private final static GradeService gradeService = GradeService.getInstance();
-	private final static MailService mailService = MailService.getInstance();
 	// JSP
 	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/teacher/assessment-grading.jsp";
 
@@ -77,7 +75,7 @@ public class GradeServlet extends HttpServlet {
 	        }
 	        message = "Votre note pour l'évaluation: "+assessment.getName()+" ("+assessment.getCourse().getName()+") est disponible.\n"
 	        		+ "Accédez à la plateforme CoffeeClasses pour la consulter.";
-	        mailService.sendMail(s, "Note disponible", message);
+	        MailService.getInstance().sendMail(s, "Note disponible", message);
 		}
 		request.setAttribute("successMessage", "Les notes ont bien été enregistrées.");
 		response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");
