@@ -14,8 +14,8 @@ import java.io.IOException;
 
 @WebServlet("/panel/student/details")
 public class StudentSummaryServlet extends HttpServlet {
-
-    private final String JSP_PATH = "/WEB-INF/views/pages/panel/student/student-summary.jsp";
+    // JSP
+    private final static String JSP_PATH = "/WEB-INF/views/pages/panel/student/student-summary.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
