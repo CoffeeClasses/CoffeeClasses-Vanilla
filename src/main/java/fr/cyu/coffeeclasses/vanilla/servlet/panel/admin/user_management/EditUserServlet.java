@@ -5,7 +5,7 @@ import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
-import fr.cyu.coffeeclasses.vanilla.mail.MailSender;
+import fr.cyu.coffeeclasses.vanilla.service.MailService;
 import fr.cyu.coffeeclasses.vanilla.service.CourseService;
 import fr.cyu.coffeeclasses.vanilla.service.UserService;
 
@@ -28,6 +28,7 @@ public class EditUserServlet extends HttpServlet {
 	// Services
 	private final UserService userService = UserService.getInstance();
 	private final CourseService courseService = CourseService.getInstance();
+	private final MailService mailService = MailService.getInstance();
 	// JSP
 	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/admin/user-management/user-edit.jsp";
 
@@ -121,7 +122,7 @@ public class EditUserServlet extends HttpServlet {
 
 			// Sauvegarde
 			userService.update(target);
-			MailSender.getInstance().sendMail(target, "Données mises à jour", "Bonjour,\nVos informations ont bien été mises à jours par la scolarité.");
+			mailService.sendMail(target, "Données mises à jour", "Bonjour,\nVos informations ont bien été mises à jours par la scolarité.");
 
 			// Redirect to the admin panel
 			response.sendRedirect(request.getContextPath() + "/panel/admin/users");

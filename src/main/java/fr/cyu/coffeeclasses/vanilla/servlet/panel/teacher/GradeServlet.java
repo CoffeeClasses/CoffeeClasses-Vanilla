@@ -2,7 +2,7 @@ package fr.cyu.coffeeclasses.vanilla.servlet.panel.teacher;
 
 import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
-import fr.cyu.coffeeclasses.vanilla.mail.MailSender;
+import fr.cyu.coffeeclasses.vanilla.service.MailService;
 import fr.cyu.coffeeclasses.vanilla.service.AssessmentService;
 import fr.cyu.coffeeclasses.vanilla.service.GradeService;
 import fr.cyu.coffeeclasses.vanilla.service.StudentService;
@@ -23,8 +23,8 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 public class GradeServlet extends HttpServlet {
 	// Services
 	private final static AssessmentService assessmentService = AssessmentService.getInstance();
-	private final static StudentService studentService = StudentService.getInstance();
 	private final static GradeService gradeService = GradeService.getInstance();
+	private final static MailService mailService = MailService.getInstance();
 	// JSP
 	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/teacher/assessment-grading.jsp";
 
@@ -56,7 +56,6 @@ public class GradeServlet extends HttpServlet {
 
 		double newValue;
 		String message;
-		MailSender mailSender = MailSender.getInstance();
 		
 		for(Student s: concerned) {
 			newValue = Double.parseDouble(request.getParameter(String.valueOf(s.getId())));
@@ -77,8 +76,8 @@ public class GradeServlet extends HttpServlet {
 				}
 	        }
 	        message = "Votre note pour l'évaluation: "+assessment.getName()+" ("+assessment.getCourse().getName()+") est disponible.\n"
-	        		+ "Accédez à votre plateforme pour la consulter.";
-	        mailSender.sendMail(s, "Note disponible", message);
+	        		+ "Accédez à la plateforme CoffeeClasses pour la consulter.";
+	        mailService.sendMail(s, "Note disponible", message);
 		}
 		request.setAttribute("successMessage", "Les notes ont bien été enregistrées.");
 		response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");
