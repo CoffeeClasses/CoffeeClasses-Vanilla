@@ -12,6 +12,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakartamail.version>2.1.3</jakartamail.version>
     </properties>
 
     <dependencies>
@@ -99,6 +100,18 @@
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>4.0.0</version>
             <scope>provided</scope>
+        </dependency>
+        
+        <!-- Mail -->
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>${jakartamail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>${jakartamail.version}</version>
         </dependency>
     </dependencies>
 

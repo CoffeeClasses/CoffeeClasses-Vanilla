@@ -2,9 +2,9 @@ package fr.cyu.coffeeclasses.vanilla.servlet.panel.teacher;
 
 import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
+import fr.cyu.coffeeclasses.vanilla.service.MailService;
 import fr.cyu.coffeeclasses.vanilla.service.AssessmentService;
 import fr.cyu.coffeeclasses.vanilla.service.GradeService;
-import fr.cyu.coffeeclasses.vanilla.service.StudentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +22,6 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 public class GradeServlet extends HttpServlet {
 	// Services
 	private final static AssessmentService assessmentService = AssessmentService.getInstance();
-	private final static StudentService studentService = StudentService.getInstance();
 	private final static GradeService gradeService = GradeService.getInstance();
 	// JSP
 	private final static String JSP_PATH = "/WEB-INF/views/pages/panel/teacher/assessment-grading.jsp";
@@ -54,6 +53,8 @@ public class GradeServlet extends HttpServlet {
 		Set<Student> concerned = assessment.getStudents();
 
 		double newValue;
+		String message;
+		
 		for(Student s: concerned) {
 			newValue = Double.parseDouble(request.getParameter(String.valueOf(s.getId())));
 			Optional<Grade> existingGrade = gradeService.findByStudentAndAssessment(s, assessment);
@@ -72,6 +73,9 @@ public class GradeServlet extends HttpServlet {
 					System.err.println("No enrollment found for student: " + s.getId());
 				}
 	        }
+	        message = "Votre note pour l'évaluation: "+assessment.getName()+" ("+assessment.getCourse().getName()+") est disponible.\n"
+	        		+ "Accédez à la plateforme CoffeeClasses pour la consulter.";
+	        MailService.getInstance().sendMail(s, "Note disponible", message);
 		}
 		request.setAttribute("successMessage", "Les notes ont bien été enregistrées.");
 		response.sendRedirect(request.getContextPath() + "/panel/teacher/assessments");

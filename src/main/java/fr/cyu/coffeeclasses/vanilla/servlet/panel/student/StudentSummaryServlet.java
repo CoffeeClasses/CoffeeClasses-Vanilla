@@ -23,10 +23,8 @@ public class StudentSummaryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getAttribute("user");
-
         Student student = (Student) user;
         req.setAttribute("target", student);
-
         req.getRequestDispatcher(JSP_PATH).forward(req, resp);
     }
 
