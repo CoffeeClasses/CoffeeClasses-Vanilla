@@ -4,7 +4,6 @@ import fr.cyu.coffeeclasses.vanilla.database.dao.GradeDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Assessment;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Grade;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
-import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import java.util.Optional;
 

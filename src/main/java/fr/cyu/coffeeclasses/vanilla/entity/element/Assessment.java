@@ -1,12 +1,11 @@
 package fr.cyu.coffeeclasses.vanilla.entity.element;
 
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
-
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;

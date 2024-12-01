@@ -1,9 +1,7 @@
 package fr.cyu.coffeeclasses.vanilla.entity.user;
 
-import fr.cyu.coffeeclasses.vanilla.entity.element.Assessment;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Enrollment;
-import fr.cyu.coffeeclasses.vanilla.entity.element.Grade;
 
 import jakarta.persistence.*;
 

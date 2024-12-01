@@ -4,7 +4,6 @@ import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Entity

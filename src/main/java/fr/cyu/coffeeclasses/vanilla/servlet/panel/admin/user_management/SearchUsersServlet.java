@@ -1,6 +1,5 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.user_management;
 
-import fr.cyu.coffeeclasses.vanilla.database.dao.UserDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;

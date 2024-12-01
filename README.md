@@ -58,3 +58,5 @@ You can either deploy the built `.war` file to a Tomcat server or run the applic
 | Linux | Windows |
 | --- | --- | 
 | ```./mvnw package cargo:run``` | ```mvnw.cmd package cargo:run``` |
+
+*Note : Default admin user is `admin-coffeeclasses@yopmail.com` with password `admin123`.*

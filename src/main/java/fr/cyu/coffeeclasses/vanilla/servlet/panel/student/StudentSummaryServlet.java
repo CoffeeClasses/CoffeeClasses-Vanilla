@@ -1,7 +1,5 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.student;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import fr.cyu.coffeeclasses.vanilla.service.PdfGeneratorService;

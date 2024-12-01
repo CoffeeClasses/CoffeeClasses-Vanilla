@@ -1,6 +1,5 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.pre_auth;
 
-import fr.cyu.coffeeclasses.vanilla.database.exception.DataNonsenseException;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;

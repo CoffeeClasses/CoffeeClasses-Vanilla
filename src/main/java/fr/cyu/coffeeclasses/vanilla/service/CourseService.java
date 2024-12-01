@@ -2,7 +2,6 @@ package fr.cyu.coffeeclasses.vanilla.service;
 
 import fr.cyu.coffeeclasses.vanilla.database.dao.CourseDAO;
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
-import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 
 import java.util.Optional;
 import java.util.Set;

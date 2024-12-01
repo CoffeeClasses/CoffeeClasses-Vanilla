@@ -1,9 +1,7 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel;
 
-import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
 import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import fr.cyu.coffeeclasses.vanilla.service.UserService;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Set;
 
 @WebServlet("/panel/users/show")
 public class UserShowServlet extends HttpServlet {

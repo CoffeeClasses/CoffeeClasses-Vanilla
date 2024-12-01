@@ -1,13 +1,9 @@
 package fr.cyu.coffeeclasses.vanilla.servlet.panel.admin.course_management;
 
 import fr.cyu.coffeeclasses.vanilla.entity.element.Course;
-import fr.cyu.coffeeclasses.vanilla.entity.user.Administrator;
-import fr.cyu.coffeeclasses.vanilla.entity.user.Student;
 import fr.cyu.coffeeclasses.vanilla.entity.user.Teacher;
-import fr.cyu.coffeeclasses.vanilla.entity.user.User;
 import fr.cyu.coffeeclasses.vanilla.service.CourseService;
 import fr.cyu.coffeeclasses.vanilla.service.TeacherService;
-import fr.cyu.coffeeclasses.vanilla.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
